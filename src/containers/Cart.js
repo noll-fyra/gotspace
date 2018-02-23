@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import queryString from 'query-string'
 import Recommendation from '../components/cart/Recommendation'
 import Summary from '../components/cart/Summary'
 import constants from '../constants/constants'
@@ -31,13 +30,13 @@ class Cart extends Component {
         let temp = {}
         temp.title = item.title
         temp.description = item.description
-        temp.actual_weight = item.weight
+        temp.actual_weight = parseFloat(item.weight)
         temp.height = item.height
         temp.width = item.width
         temp.length = item.breadth
         temp.category = item.category_name
         temp.declared_currency = _this.state.declaredCurrency
-        temp.declared_customs_value = item.price
+        temp.declared_customs_value = parseFloat(item.price)
         return temp
       })
     }
@@ -60,7 +59,7 @@ class Cart extends Component {
     data.order = order
     data.catalog = convertForAPI(this.props.products)
 
-    axios.post(api, queryString.stringify(data), {headers: {'content-type': 'application/json'}})
+    axios.post(api, JSON.stringify(data), {headers: {'content-type': 'application/json'}})
     .then(res => {
       console.log(res)
     })
