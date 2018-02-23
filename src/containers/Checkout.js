@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import constants from '../constants/constants'
 import styled from 'styled-components'
 
 class Checkout extends Component {
@@ -11,7 +12,12 @@ class Checkout extends Component {
     // let { products, cart } = this.props
     return (
       <Container>
-        <h1>Congratulations you saved a ton of money woohoo</h1>
+        <h1>It's ordered!</h1>
+        <div style={{marginTop: constants.size.margin.large}}>
+          Thank you for your order - we hope you had a good time shopping with us. <br /><br />
+
+          You have saved a tonne of money by ordering with us!
+        </div>
       </Container>
     )
   }
@@ -26,6 +32,8 @@ Checkout.PropTypes = {
 const Container = styled.main`
   display: flex;
   height: calc(100vh - 48px);
+  padding: ${constants.size.padding.large} ${constants.size.padding.media};
+  flex-flow: column;
 `
 
 export default Checkout

@@ -3,34 +3,27 @@ import PropTypes from 'prop-types'
 import constants from '../../constants/constants'
 import styled from 'styled-components'
 
-class Recommendation extends Component {
+class Address extends Component {
   constructor (props) {
     super(props)
     this.state = {}
   }
 
   render () {
-    // let { productsList, options, handleUpdateCart } = this.props
-
     return (
       <Container>
         <Top><h4>SHIPPING ADDRESS</h4></Top>
-        <Address>
+        <AddressDiv>
           <b>Smile Person</b><br />
           2 Stamford Road<br />
           Level 70 Equinox Complex, Downtown Core<br />
           Singapore 178882<br />
-        </Address>
+        </AddressDiv>
       </Container>
     )
   }
 }
 
-Recommendation.propTypes = {
-  productsList: PropTypes.object.isRequired,
-  options: PropTypes.array.isRequired,
-  handleUpdateCart: PropTypes.func.isRequired
-}
 
 const Container = styled.div`
   width: 100%;
@@ -49,7 +42,7 @@ const Top = styled.div`
   margin-bottom: ${constants.size.margin.medium};
 `
 
-const Address = styled.div`
+const AddressDiv = styled.div`
   border: 1px solid black;
   border-radius: ${constants.size.borderRadius.small};
   font-family: 'Muli';
@@ -57,4 +50,4 @@ const Address = styled.div`
   margin-top: ${constants.size.margin.small};
 `
 
-export default Recommendation
+export default Address
