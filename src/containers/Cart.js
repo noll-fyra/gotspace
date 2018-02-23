@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import queryString from 'query-string'
-import Address from '../components/cart/Address'
 import Recommendation from '../components/cart/Recommendation'
 import Summary from '../components/cart/Summary'
-import constants from '../constants/constants'
+import Address from '../components/cart/Address'
 import styled from 'styled-components'
 
 class Cart extends Component {
@@ -16,7 +14,9 @@ class Cart extends Component {
       destinationCountry: 'SG',
       originPostalCode: '389779',
       destinationPostalCode: '277993',
-      declaredCurrency: 'SGD'
+      declaredCurrency: 'SGD',
+      recommendations: [],
+      loading: false
     }
     this.fetchRecommendations = this.fetchRecommendations.bind(this)
   }
@@ -30,15 +30,16 @@ class Cart extends Component {
     function convertForAPI (arr) {
       return arr.map(item => {
         let temp = {}
+        temp.product_id = item.product_id
         temp.title = item.title
         temp.description = item.description
-        temp.actual_weight = item.weight
+        temp.actual_weight = parseFloat(item.weight)
         temp.height = item.height
         temp.width = item.width
         temp.length = item.breadth
         temp.category = item.category_name
         temp.declared_currency = _this.state.declaredCurrency
-        temp.declared_customs_value = item.price
+        temp.declared_customs_value = parseFloat(item.price)
         return temp
       })
     }
@@ -61,26 +62,27 @@ class Cart extends Component {
     data.order = order
     data.catalog = convertForAPI(this.props.products)
 
-    axios.post(api, queryString.stringify(data), {headers: {'content-type': 'application/json'}})
-    .then(res => {
-      console.log(res)
+    this.setState({ loading: true })
+    axios.post(api, JSON.stringify(data), {headers: {'content-type': 'application/json'}})
+    .then(res => { console.log(res.data); this.setState({ recommendations: res.data, loading: false }) })
+    .catch(err => {
+      console.error(err)
+      this.setState({ loading: false })
     })
-    .catch(err => console.error(err))
   }
 
   render () {
-    let { products, productsList, cart, handleUpdateCart, options } = this.props
+    let { products, productsList, cart, handleUpdateCart } = this.props
 
     return (
       <Container>
         <LeftContainer>
           <Address />
-          <Recommendation productsList={productsList} options={products} handleUpdateCart={handleUpdateCart} />
-
+          <Recommendation productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} loading={this.state.loading} recommendations={this.state.recommendations} />
         </LeftContainer>
 
         <SummaryContainer>
-          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} options={options} />
+          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} />
         </SummaryContainer>
       </Container>
     )
@@ -91,8 +93,7 @@ Cart.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   productsList: PropTypes.object.isRequired,
   cart: PropTypes.object.isRequired,
-  handleUpdateCart: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.object).isRequired
+  handleUpdateCart: PropTypes.func.isRequired
 }
 
 const Container = styled.main`
@@ -103,6 +104,9 @@ const Container = styled.main`
 const LeftContainer = styled.div`
   width: 60%;
   height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
   padding: 12px;
   padding-right: 0;
 `

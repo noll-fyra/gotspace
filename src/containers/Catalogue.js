@@ -25,11 +25,11 @@ class Catalogue extends Component {
         <Container>
           {filtered.length > 0
             ? <Cards>
-              {filtered.map(product => {
-                return <CardDiv key={product.product_id}>
+              {filtered.map(product =>
+                <CardDiv key={product.product_id}>
                   <ProductCard product={product} count={this.props.cart[product.product_id]} handleUpdateCart={this.props.handleUpdateCart} />
                 </CardDiv>
-              })}
+              )}
               {(filtered.length - 2) % 3 === 0 && <CardDiv />}
             </Cards>
             : <div style={{textAlign: 'center'}}>Oops! We did not find any products.</div>
@@ -84,11 +84,11 @@ const Container = styled.div`
   padding: ${constants.size.padding.large} ${constants.size.padding.media};
 `
 
-const Breado = styled.div`
-  display: flex;
-  flex-flow: row;
-  margin-bottom: ${constants.size.margin.large};
-`
+// const Breado = styled.div`
+//   display: flex;
+//   flex-flow: row;
+//   margin-bottom: ${constants.size.margin.large};
+// `
 
 const Cards = styled.div`
   width: 100%;

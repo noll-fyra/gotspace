@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import constants from '../../constants/constants'
 import PropTypes from 'prop-types'
-import picture from '../../assets/default.jpg' 
+import picture from '../../assets/default.jpg'
 import styled from 'styled-components'
 
 class ProductCard extends Component {

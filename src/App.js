@@ -13,8 +13,7 @@ class App extends Component {
     this.state = {
       products: products,
       productsList: {},
-      cart: {},
-      options: []
+      cart: {}
     }
     this.convertProductsToObject = this.convertProductsToObject.bind(this)
     this.loadRandomCart = this.loadRandomCart.bind(this)
@@ -23,7 +22,7 @@ class App extends Component {
 
   componentWillMount () {
     this.convertProductsToObject()
-    this.loadRandomCart()
+    // this.loadRandomCart()
   }
 
   convertProductsToObject () {
@@ -57,8 +56,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/' render={() => <Redirect to='/catalogue' />} />
             <Route path='/catalogue' render={(props) => <Catalogue products={this.state.products} productsList={this.state.productsList} cart={this.state.cart} handleUpdateCart={this.handleUpdateCart} {...props} />} />
-            <Route path='/cart' render={(props) => <Cart products={this.state.products} productsList={this.state.productsList} cart={this.state.cart} handleUpdateCart={this.handleUpdateCart} options={this.state.options} {...props} />} />
-            <Route path='/checkout' render={(props) => <Checkout products={this.state.products} productsList={this.state.productsList} cart={this.state.cart} handleUpdateCart={this.handleUpdateCart} options={this.state.options} {...props} />} />
+            <Route path='/cart' render={(props) => <Cart products={this.state.products} productsList={this.state.productsList} cart={this.state.cart} handleUpdateCart={this.handleUpdateCart} {...props} />} />
+            <Route path='/checkout' render={(props) => <Checkout products={this.state.products} productsList={this.state.productsList} cart={this.state.cart} handleUpdateCart={this.handleUpdateCart} {...props} />} />
           </Switch>
         </div>
       </Router>

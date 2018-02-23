@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import constants from '../../constants/constants'
 import styled from 'styled-components'
 
@@ -13,21 +13,22 @@ class Address extends Component {
     return (
       <Container>
         <Top><h4>SHIPPING ADDRESS</h4></Top>
-        <AddressDiv>
+        <MainAddress>
           <b>Smile Person</b><br />
           2 Stamford Road<br />
           Level 70 Equinox Complex, Downtown Core<br />
           Singapore 178882<br />
-        </AddressDiv>
+        </MainAddress>
       </Container>
     )
   }
 }
 
+Address.propTypes = {}
 
 const Container = styled.div`
   width: 100%;
-  height: 30%;
+  height: 49%;
   border: 1px solid lightGrey;
   padding: 12px;
   border-radius: 8px;
@@ -42,7 +43,8 @@ const Top = styled.div`
   margin-bottom: ${constants.size.margin.medium};
 `
 
-const AddressDiv = styled.div`
+
+const MainAddress = styled.div`
   border: 1px solid black;
   border-radius: ${constants.size.borderRadius.small};
   font-family: 'Muli';
