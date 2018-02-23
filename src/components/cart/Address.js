@@ -10,8 +10,6 @@ class Address extends Component {
   }
 
   render () {
-    // let { productsList, options, handleUpdateCart } = this.props
-
     return (
       <Container>
         <Top><h4>SHIPPING ADDRESS</h4></Top>
@@ -44,6 +42,7 @@ const Top = styled.div`
   align-items: baseline;
   margin-bottom: ${constants.size.margin.medium};
 `
+
 
 const MainAddress = styled.div`
   border: 1px solid black;
