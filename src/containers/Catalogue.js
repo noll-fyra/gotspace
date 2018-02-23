@@ -24,21 +24,26 @@ class Catalogue extends Component {
         </ProductNav>
         <Container>
           <Breado>
-            <div style={{marginRight: constants.size.margin.small}}>All</div>
+            <div style={{marginRight: constants.size.margin.small, cursor: 'pointer'}} onClick={() => this.setState({category: 'all'})}>All</div>
             {this.state.category !== 'all' &&
             <div style={{display: 'flex', flexFlow: 'row'}}>
               <div style={{marginRight: constants.size.margin.small}}>></div>
-              <div>{this.state.category}</div>
+              <div onClick={() => this.setState({category: this.state.category})} style={{cursor: 'pointer'}}>{this.state.category}</div>
             </div>
             }
           </Breado>
+
+          {filtered.length > 0 ?
           <Cards>
             {filtered.map(product => {
               return <CardDiv key={product.id}>
                 <ProductCard product={product} />
               </CardDiv>
             })}
-          </Cards>
+            {(filtered.length - 2) % 3 === 0 && <CardDiv />}
+          </Cards> :
+          <div style={{textAlign: 'center'}}>Oops! We did not find any products.</div>
+          }
         </Container>
       </Main>
     )
@@ -60,19 +65,20 @@ const ProductNav = styled.div`
   flex-flow: row;
   justify-content: center;
   align-items: center;
-  padding: ${constants.size.padding.small};
+  padding: ${constants.size.padding.small} ${constants.size.padding.media};
   background-color: #B9F0FFFF;
   height: ${constants.size.height.small};
   width: 100vw;
 `
 
 const Category = styled.div`
-  margin-right: 32px;
+  width: 25%;
+  height: ${constants.size.height.small};
   font-size: 0.8em;
   font-weight: 600;
   letter-spacing: 1px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
   border-bottom: 2px solid ${props => props.active ? constants.colors.darkGrey : 'transparent'};
@@ -98,5 +104,6 @@ const Cards = styled.div`
 const CardDiv = styled.div`
   width: 32%;
 `
+
 
 export default Catalogue

@@ -7,7 +7,35 @@ import styled from 'styled-components'
 class ProductCard extends Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      added: false,
+      count: 1
+    }
+    this.handleAdd = this.handleAdd.bind(this)
+  }
+
+  handleAdd() {
+    if (!this.added) {
+      this.setState({added: true})
+      this.props.handleProductAdd(this.props.product.id, 1)
+    } else {
+      let currentCount = this.state.count
+      currentCount += 1
+      this.setState({count: currentCount})
+      this.props.handleProductAdd(this.props.product.id, currentCount)
+    }
+  }
+
+  handleSubtract() {
+    if (this.state.count === 1) {
+      this.setState({added: false})
+      this.props.handleProductAdd(this.props.product.id, 0)
+    } else {
+      let currentCount = this.state.count
+      currentCount -= 1
+      this.setState({count: currentCount})
+      this.props.handleProductAdd(this.props.product.id, currentCount)
+    }
   }
 
   render () {
@@ -18,8 +46,18 @@ class ProductCard extends Component {
         </ImgDiv>
         <Info>
           <Title>{this.props.product.title.toUpperCase()}</Title>
+          <Price>${this.props.product.price.toFixed(2)}</Price>
           <Description>{this.props.product.description}</Description>
-          <Button><i className='fas fa-shopping-cart' />&nbsp;Add to cart</Button>
+          {this.state.added ?
+            <ButtonAdd>
+              <Inner><i className='fas fa-minus' /></Inner>
+              <Inner>{this.state.count}</Inner>
+              <Inner><i className='fas fa-plus' /></Inner>
+            </ButtonAdd>
+          <Button onClick={() => this.setState({added: true})}>
+            <i className='fas fa-shopping-cart' />&nbsp;&nbsp;Add to cart
+          </Button> 
+          }
         </Info>
       </ProductCardDiv>
     )
@@ -34,7 +72,6 @@ const ProductCardDiv = styled.div`
   display: flex;
   flex-flow: column;
   width: 100%;
-  padding: ${constants.size.padding.small};
 `
 
 const ImgDiv = styled.div`
@@ -61,6 +98,12 @@ const Title = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-family: 'Oswald';
+`
+
+const Price = styled.div`
+  font-size: 0.9em;
+  font-family: 'Muli';
 `
 
 const Description = styled.div`
@@ -82,6 +125,28 @@ const Button = styled.div`
   color: ${constants.colors.white};
   font-family: 'Muli';
   font-size: 0.9em;
+
+  &: hover {
+    background-color: ${constants.colors.omnivore}
+  }
+`
+
+const ButtonAdd = Button.extend`
+  justify-content: space-between;
+  flex-flow: row;
+
+  &: hover {
+    background-color: ${constants.colors.brand}
+  }
+`
+
+const Inner = styled.div`
+  width: 33.333%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${constants.colors.white};
+  font-size: 1.2em;
 `
 
 export default ProductCard
