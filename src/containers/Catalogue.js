@@ -15,7 +15,6 @@ class Catalogue extends Component {
     const filtered = this.state.category === 'all' ? this.props.products : this.props.products.filter(product => { return product.category_name === this.state.category })
     return (
       <Main>
-        <div>{JSON.stringify(this.props.cart)}</div>
         <ProductNav>
           {constants.lists.categories.map(category => {
             return <Category key={category} onClick={() => this.setState({category: category})} active={this.state.category === category}>

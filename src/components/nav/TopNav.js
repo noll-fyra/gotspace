@@ -10,7 +10,16 @@ class TopNav extends Component {
     return (
       <Container>
         <Third style={{justifyContent: 'flex-start'}}>
+<<<<<<< HEAD
           <Logo to='/'>Got Space?</Logo>
+=======
+          <Logo>Got Space?</Logo>
+        </Third>
+        <Third>
+          <NavLink to='/catalogue'>Catalogue</NavLink>
+
+          <NavLink to='/checkout'>Checkout</NavLink>
+>>>>>>> 49f9540e3d585cd0bc4b71607f969fc85db333d3
         </Third>
         <Third />
         <Third style={{justifyContent: 'flex-end'}}>
