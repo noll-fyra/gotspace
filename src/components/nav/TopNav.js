@@ -11,7 +11,6 @@ class TopNav extends Component {
       <Container>
         <Third style={{justifyContent: 'flex-start'}}>
           <Logo>Got Space?</Logo>
-          <div>{JSON.stringify(Object.values(this.props.cart))}</div>
         </Third>
         <Third>
           <NavLink to='/catalogue'>Catalogue</NavLink>
