@@ -10,10 +10,12 @@ class Summary extends Component {
   }
   render () {
     let { products, cart, handleUpdateCart } = this.props
+    let count = Object.values(cart).reduce((a, b) => a + b)
     return (
       <Container>
-        <div style={{height: '5%'}}>
+        <div style={{height: '5%', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline'}}>
           <h4>SUMMARY</h4>
+          <h5>{count}{count === 1 ? ' Item' : ' Items'}</h5>
         </div>
         <div style={{maxHeight: '75%', overflow: 'auto'}}>
           {products.map((item, index) => cart[item.product_id] ? <ProductSummaryCard key={item.product_id} product={item} count={cart[item.product_id]} handleUpdateCart={handleUpdateCart} /> : <div key={item.product_id} />)}
