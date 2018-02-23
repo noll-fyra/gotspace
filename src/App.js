@@ -4,20 +4,14 @@ import TopNav from './components/nav/TopNav'
 import Catalogue from './containers/Catalogue'
 import Cart from './containers/Cart'
 import Checkout from './containers/Checkout'
+import products from './assets/updatedProducts.json'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      products: [
-        {id: 1, title: 'car', price: 3.2, description: 'This is a car', image: '', category: 'car accessories'},
-        {id: 2, title: 'phone', price: 4.7, description: 'This is a phone', image: '', category: 'kitchen & appliances'},
-        {id: 3, title: 'donkey', price: 1.1, description: 'This is a donkey', image: '', category: 'textbooks'}
-      ],
-      cart: {
-        1: 3,
-        2: 1
-      },
+      products: products,
+      cart: {},
       options: []
     }
     this.handleUpdateCart = this.handleUpdateCart.bind(this)

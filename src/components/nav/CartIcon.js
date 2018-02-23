@@ -5,10 +5,11 @@ import styled from 'styled-components'
 
 class CartIcon extends Component {
   render () {
+    let cartArray = Object.values(this.props.cart)
     return (
       <Container className='fa-layers fa-fw' to='/cart'>
         <Cart className='fas fa-shopping-bag' />
-        <span class='fa-layers-text' data-fa-transform='shrink-10 down-2' style={{color: 'white'}}>{Object.values(this.props.cart).reduce((a, b) => a + b)}</span>
+        <span class='fa-layers-text' data-fa-transform='shrink-10 down-2' style={{color: 'white'}}>{cartArray.length > 0 ? cartArray.reduce((a, b) => a + b) : 0}</span>
       </Container>
     )
   }

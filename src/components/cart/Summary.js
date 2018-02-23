@@ -13,8 +13,7 @@ class Summary extends Component {
     return (
       <Container>
         <h2 style={{textAlign: 'center'}}>Summary</h2>
-        {products.map((item, index) => cart[item.id] ? <ProductSummaryCard product={item} count={cart[item.id]} handleUpdateCart={handleUpdateCart} /> : <div />)}
-
+        {products.map((item, index) => cart[item.product_id] ? <ProductSummaryCard product={item} count={cart[item.product_id]} handleUpdateCart={handleUpdateCart} /> : <div />)}
       </Container>
     )
   }
