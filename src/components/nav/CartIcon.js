@@ -8,7 +8,7 @@ class CartIcon extends Component {
     return (
       <Container className='fa-layers fa-fw' to='/cart'>
         <i className='fas fa-shopping-cart' />
-        <span class='fa-layers-counter' style={{backgroundColor: 'white', border: '1px solid black', fontSize: '56px', color: 'black'}}>{this.props.cart.length}</span>
+        <span class='fa-layers-counter' style={{backgroundColor: 'white', border: '1px solid black', fontSize: '56px', color: 'black'}}>{Object.values(this.props.cart).reduce((a, b) => a + b)}</span>
       </Container>
     )
   }
