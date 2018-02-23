@@ -4,6 +4,7 @@ import TopNav from './components/nav/TopNav'
 import Catalogue from './containers/Catalogue'
 import Cart from './containers/Cart'
 import Checkout from './containers/Checkout'
+// import constants from './constants/constants'
 import products from './assets/products.json'
 
 class App extends Component {
@@ -35,6 +36,7 @@ class App extends Component {
   handleUpdateCart (productID, amount) {
     let cart = Object.assign({}, this.state.cart)
     cart[productID] = amount
+    console.log(cart)
     this.setState({ cart: cart })
   }
 

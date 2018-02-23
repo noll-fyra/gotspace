@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import CartIcon from './CartIcon'
+import constants from '../../constants/constants'
 import styled from 'styled-components'
 
 class TopNav extends Component {
@@ -9,7 +10,8 @@ class TopNav extends Component {
     return (
       <Container>
         <Third style={{justifyContent: 'flex-start'}}>
-          <Logo>Got Space</Logo>
+          <Logo>Got Space?</Logo>
+          <div>{JSON.stringify(Object.values(this.props.cart))}</div>
         </Third>
         <Third>
           <NavLink to='/catalogue'>Catalogue</NavLink>
@@ -26,13 +28,18 @@ class TopNav extends Component {
 }
 
 TopNav.PropTypes = {
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired
+  cart: PropTypes.object.isRequired
 }
 
 const Container = styled.nav`
   display: flex;
   height: 48px;
   box-shadow: 0px 1px 1px 2px #eeeeee;
+  background-image: url('https://i.imgur.com/aASzm5m.jpg');
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 20;
 `
 
 const Third = styled.div`
@@ -45,17 +52,23 @@ const Third = styled.div`
 `
 
 const Logo = styled.h1`
-  font-style: italic;
-  color: red;
+  font-family: 'Bungee';
+  font-size: 2em;
+  color: ${constants.colors.white};
+  letter-spacing: 1px;
 `
 
 const NavLink = styled(Link)`
   padding: 24px;
+  color: ${constants.colors.white};
+  text-decoration: none;
+  font-family: 'Muli';
 `
 
 const User = styled.span`
   font-size: 32px;
   margin-left: 12px;
+  color: ${constants.colors.white};
 `
 
 export default TopNav
