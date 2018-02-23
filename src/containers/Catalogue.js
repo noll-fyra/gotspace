@@ -104,6 +104,7 @@ const Cards = styled.div`
 
 const CardDiv = styled.div`
   width: 32%;
+  margin-bottom: ${constants.size.padding.medium};
 `
 
 

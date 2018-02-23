@@ -10,7 +10,7 @@ class CartIcon extends Component {
     return (
       <Container className='fa-layers fa-fw' to='/cart'>
         <Cart className='fas fa-shopping-bag' />
-        <span class='fa-layers-text' data-fa-transform='shrink-10 down-2' style={{color: 'white'}}>{cartArray.length > 0 ? cartArray.reduce((a, b) => a + b) : 0}</span>
+        <span class='fa-layers-text' data-fa-transform='shrink-10 down-2' style={{color: 'black'}}>{cartArray.length > 0 ? cartArray.reduce((a, b) => a + b) : 0}</span>
       </Container>
     )
   }

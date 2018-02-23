@@ -13,6 +13,7 @@ class ProductCard extends Component {
     }
     this.handleAdd = this.handleAdd.bind(this)
     this.handleSubtract = this.handleSubtract.bind(this)
+    this.shorten = this.shorten.bind(this)
   }
 
   handleAdd() {
@@ -39,6 +40,32 @@ class ProductCard extends Component {
     }
   }
 
+  shorten (title, type) {
+    let text = title.split('')
+    let length = title.length
+    let limit1 = 35
+    let limit2 = 31
+
+    if (type === 'description') {
+      limit1 = 80
+      limit2 = 76
+    } 
+
+    if (length < limit1) {
+      return title
+    } else {
+      let blank = ''
+      let total = 0
+      while (total < limit2) {
+        let first = text.shift()
+        blank += first
+        total += 1
+      }
+      let final = blank + '...'
+      return final
+    }
+  }
+
   render () {
     return (
       <ProductCardDiv>
@@ -46,9 +73,12 @@ class ProductCard extends Component {
           <Image src={this.props.product.image ? this.props.procuct.image : 'https://i.imgur.com/e2Xhr9V.png'} />
         </ImgDiv>
         <Info>
-          <Title>{this.props.product.title.toUpperCase()}</Title>
-          {/*<Price>${this.props.product.price.toFixed(2)}</Price>*/}
-          <Description>{this.props.product.description}</Description>
+          <div>
+            <Title>{this.shorten(this.props.product.title.toUpperCase(), 'title')}</Title>
+            {/*<Price>${this.props.product.price.toFixed(2)}</Price>*/}
+            <Description>{this.shorten(this.props.product.description, 'description')}</Description>
+          </div>
+          <div style={{display: 'flex',flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'baseline', }}>
           {this.state.added ?
             <ButtonAdd>
               <Inner onClick={() => this.handleSubtract()}><i className='fas fa-minus' /></Inner>
@@ -59,6 +89,7 @@ class ProductCard extends Component {
             <i className='fas fa-shopping-cart' />&nbsp;&nbsp;Add to cart
           </Button> 
           }
+          </div>
         </Info>
       </ProductCardDiv>
     )
@@ -87,8 +118,10 @@ const Image = styled.img`
 `
 
 const Info = styled.div`
+  min-height: 120px;
   display: flex;
   flex-flow: column;
+  justify-content: space-between;
 `
 
 const Title = styled.div`
@@ -126,6 +159,8 @@ const Button = styled.div`
   color: ${constants.colors.white};
   font-family: 'Muli';
   font-size: 0.9em;
+  flex-wrap: wrap;
+  align-items: baseline;
 
   &: hover {
     background-color: ${constants.colors.omnivore}
