@@ -16,7 +16,11 @@ class Catalogue extends Component {
             return <Category>{category.toUpperCase()}</Category>
           })}
         </ProductNav>
-        
+        <Container>
+          <Breado>
+            <div>All</div>
+          </Breado>
+        </Container>
       </Main>
     )
   }
@@ -51,6 +55,15 @@ const Category = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+`
+
+const Container = styled.div`
+  padding: 0 ${constants.size.padding.media};
+`
+
+const Breado = styled.div`
+  display: flex;
+  flex-flow: row;
 `
 
 export default Catalogue
