@@ -70,6 +70,12 @@ const constants = {
     }
   },
   lists: {
+    categories: [
+      'Textbooks',
+      'Home & Furniture',
+      'Kitchen & Appliances',
+      'Car Accessories'
+    ],
     priceRange: [
       '$',
       '$$',
