@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import constants from '../../constants/constants'
 import PropTypes from 'prop-types'
+import picture from '../../assets/default.jpg' 
 import styled from 'styled-components'
 
 class ProductCard extends Component {
@@ -51,7 +52,7 @@ class ProductCard extends Component {
     return (
       <ProductCardDiv>
         <ImgDiv>
-          <Image src={product.image ? product.image : 'https://i.imgur.com/e2Xhr9V.png'} />
+          <Image src={picture} />
         </ImgDiv>
         <Info>
           <div>

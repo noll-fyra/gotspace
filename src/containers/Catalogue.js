@@ -23,16 +23,6 @@ class Catalogue extends Component {
           })}
         </ProductNav>
         <Container>
-          <Breado>
-            <div style={{marginRight: constants.size.margin.small, cursor: 'pointer'}} onClick={() => this.setState({category: 'all'})}>All</div>
-            {this.state.category !== 'all' &&
-            <div style={{display: 'flex', flexFlow: 'row'}}>
-              <div style={{marginRight: constants.size.margin.small}}>></div>
-              <div onClick={() => this.setState({category: this.state.category})} style={{cursor: 'pointer'}}>{this.state.category}</div>
-            </div>
-            }
-          </Breado>
-
           {filtered.length > 0
             ? <Cards>
               {filtered.map(product => {
