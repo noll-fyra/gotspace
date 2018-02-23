@@ -10,10 +10,24 @@ class Summary extends Component {
   }
   render () {
     let { products, cart, handleUpdateCart } = this.props
+    let count = Object.values(cart).reduce((a, b) => a + b)
     return (
       <Container>
-        <h2 style={{textAlign: 'center'}}>Summary</h2>
-        {products.map((item, index) => cart[item.product_id] ? <ProductSummaryCard product={item} count={cart[item.product_id]} handleUpdateCart={handleUpdateCart} /> : <div />)}
+        <div style={{height: '5%', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline'}}>
+          <h4>SUMMARY</h4>
+          <h5>{count}{count === 1 ? ' Item' : ' Items'}</h5>
+        </div>
+        <div style={{maxHeight: '75%', overflow: 'auto'}}>
+          {products.map((item, index) => cart[item.product_id] ? <ProductSummaryCard key={item.product_id} product={item} count={cart[item.product_id]} handleUpdateCart={handleUpdateCart} /> : <div key={item.product_id} />)}
+        </div>
+        <div style={{height: '20%'}}>
+          <div>SUBTOTAL: $32</div>
+          <div>SHIPPING: $12</div>
+          <div>TOTAL: $44</div>
+          <h1 style={{backgroundColor: 'gold'}}>Buy Now</h1>
+
+        </div>
+
       </Container>
     )
   }
@@ -32,5 +46,9 @@ const Container = styled.div`
   padding: 12px;
   border-radius: 8px;
 `
+
+// const Total = styled.span`
+//
+// `
 
 export default Summary

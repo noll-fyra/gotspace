@@ -38,12 +38,12 @@ const Container = styled.main`
 `
 
 const LeftContainer = styled.div`
-  width: 70%;
+  width: 60%;
   height: 100%;
 `
 
 const SummaryContainer = styled.div`
-  width: 30%;
+  width: 40%;
   height: 100%;
   padding: 12px;
 `

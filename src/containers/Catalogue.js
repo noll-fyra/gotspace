@@ -12,7 +12,7 @@ class Catalogue extends Component {
     }
   }
   render () {
-    const filtered = this.state.category === 'all' ? this.props.products : this.props.products.filter(product => {return product.category_name === this.state.category})
+    const filtered = this.state.category === 'all' ? this.props.products : this.props.products.filter(product => { return product.category_name === this.state.category })
     return (
       <Main>
         <ProductNav>
@@ -33,16 +33,16 @@ class Catalogue extends Component {
             }
           </Breado>
 
-          {filtered.length > 0 ?
-          <Cards>
-            {filtered.map(product => {
-              return <CardDiv key={product.product_id}>
-                <ProductCard product={product} count={this.props.cart[product.product_id]} handleUpdateCart={this.props.handleUpdateCart} />
-              </CardDiv>
-            })}
-            {(filtered.length - 2) % 3 === 0 && <CardDiv />}
-          </Cards> :
-          <div style={{textAlign: 'center'}}>Oops! We did not find any products.</div>
+          {filtered.length > 0
+            ? <Cards>
+              {filtered.map(product => {
+                return <CardDiv key={product.product_id}>
+                  <ProductCard product={product} count={this.props.cart[product.product_id]} handleUpdateCart={this.props.handleUpdateCart} />
+                </CardDiv>
+              })}
+              {(filtered.length - 2) % 3 === 0 && <CardDiv />}
+            </Cards>
+            : <div style={{textAlign: 'center'}}>Oops! We did not find any products.</div>
           }
         </Container>
       </Main>
@@ -110,6 +110,5 @@ const CardDiv = styled.div`
   width: 32%;
   margin-bottom: ${constants.size.padding.medium};
 `
-
 
 export default Catalogue

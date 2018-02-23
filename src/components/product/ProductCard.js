@@ -1,45 +1,23 @@
 import React, { Component } from 'react'
 import constants from '../../constants/constants'
 import PropTypes from 'prop-types'
-import { capitalizeString } from '../../format/utilities'
 import styled from 'styled-components'
 
 class ProductCard extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      added: false,
-      count: 1
-    }
+    this.state = {}
     this.handleAdd = this.handleAdd.bind(this)
     this.handleSubtract = this.handleSubtract.bind(this)
     this.shorten = this.shorten.bind(this)
   }
 
-  handleAdd() {
+  handleAdd () {
     this.props.handleUpdateCart(this.props.product.product_id, (this.props.count || 0) + 1)
-    // if (!this.state.added) {
-    //   this.setState({added: true})
-    //   this.props.handleUpdateCart(this.props.product.product_id, 1)
-    // } else {
-    //   let currentCount = this.state.count
-    //   currentCount += 1
-    //   this.setState({count: currentCount})
-    //   this.props.handleUpdateCart(this.props.product.product_id, currentCount)
-    // }
   }
 
-  handleSubtract() {
+  handleSubtract () {
     this.props.handleUpdateCart(this.props.product.product_id, (this.props.count || 0) - 1)
-    // if (this.state.count === 1) {
-    //   this.setState({added: false})
-    //   this.props.handleUpdateCart(this.props.product.product_id, 0)
-    // } else {
-    //   let currentCount = this.state.count
-    //   currentCount -= 1
-    //   this.setState({count: currentCount})
-    //   this.props.handleUpdateCart(this.props.product.product_id, currentCount)
-    // }
   }
 
   shorten (title, type) {
@@ -51,7 +29,7 @@ class ProductCard extends Component {
     if (type === 'description') {
       limit1 = 80
       limit2 = 76
-    } 
+    }
 
     if (length < limit1) {
       return title
@@ -69,27 +47,28 @@ class ProductCard extends Component {
   }
 
   render () {
+    let { product, count } = this.props
     return (
       <ProductCardDiv>
         <ImgDiv>
-          <Image src={this.props.product.image ? this.props.procuct.image : 'https://i.imgur.com/e2Xhr9V.png'} />
+          <Image src={product.image ? product.image : 'https://i.imgur.com/e2Xhr9V.png'} />
         </ImgDiv>
         <Info>
           <div>
-            <Title>{this.shorten(this.props.product.title.toUpperCase(), 'title')}</Title>
-            <Price>${parseInt(this.props.product.price, 10).toFixed(2)}</Price>
-            <Description>{this.shorten(this.props.product.description, 'description')}</Description>
+            <Title>{this.shorten(product.title.toUpperCase(), 'title')}</Title>
+            <Price>${parseFloat(product.price)}</Price>
+            <Description>{this.shorten(product.description, 'description')}</Description>
           </div>
-          <div style={{display: 'flex',flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'baseline', }}>
-          {this.props.count > 0 ?
-            <ButtonAdd>
-              <Inner onClick={this.handleSubtract}><i className='fas fa-minus' /></Inner>
-              <Inner>{this.props.count}</Inner>
-              <Inner onClick={this.handleAdd}><i className='fas fa-plus' /></Inner>
-            </ButtonAdd> :
-          <Button onClick={this.handleAdd}>
-            <i className='fas fa-shopping-cart' />&nbsp;&nbsp;Add to cart
-          </Button> 
+          <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'baseline'}}>
+            {count > 0
+              ? <ButtonAdd>
+                <Inner onClick={this.handleSubtract}><i className='fas fa-minus' /></Inner>
+                <Inner>{count}</Inner>
+                <Inner onClick={this.handleAdd}><i className='fas fa-plus' /></Inner>
+              </ButtonAdd>
+              : <Button onClick={this.handleAdd}>
+                <i className='fas fa-shopping-cart' />&nbsp;&nbsp;Add to cart
+          </Button>
           }
           </div>
         </Info>
@@ -99,7 +78,8 @@ class ProductCard extends Component {
 }
 
 ProductCard.PropTypes = {
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  count: PropTypes.number.isRequired
 }
 
 const ProductCardDiv = styled.div`
