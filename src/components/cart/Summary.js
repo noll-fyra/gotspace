@@ -8,6 +8,7 @@ class Summary extends Component {
   constructor (props) {
     super(props)
     this.state = {}
+    this.renderCart = this.renderCart.bind(this)
     this.totalPayment = this.totalPayment.bind(this)
   }
 
@@ -16,14 +17,23 @@ class Summary extends Component {
     let cart = this.props.cart
     let total = 0
     for (var item in cart) {
-      console.log(productsList[item], cart[item])
       total += productsList[item].price * cart[item]
     }
     return total
   }
 
+  renderCart () {
+    let productsList = this.props.productsList
+    let cart = this.props.cart
+    let buy = []
+    for (var item in cart) {
+      if (cart[item]) { buy.push(productsList[item]) }
+    }
+    return buy
+  }
+
   render () {
-    let { products, cart, handleUpdateCart } = this.props
+    let { cart, handleUpdateCart } = this.props
     let count = Object.values(cart).reduce((a, b) => a + b)
     return (
       <Container>
@@ -33,7 +43,7 @@ class Summary extends Component {
         </Top>
 
         <Products>
-          {products.map((item, index) => cart[item.product_id] ? <ProductSummaryCard key={item.product_id} product={item} count={cart[item.product_id]} handleUpdateCart={handleUpdateCart} /> : <div key={item.product_id} />)}
+          {this.renderCart().map((item, index) => <ProductSummaryCard key={item.product_id} product={item} count={cart[item.product_id]} handleUpdateCart={handleUpdateCart} />)}
         </Products>
 
         <Payment>
@@ -71,7 +81,7 @@ class Summary extends Component {
 }
 
 Summary.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // products: PropTypes.arrayOf(PropTypes.object).isRequired,
   productsList: PropTypes.object.isRequired,
   cart: PropTypes.object.isRequired,
   handleUpdateCart: PropTypes.func.isRequired,

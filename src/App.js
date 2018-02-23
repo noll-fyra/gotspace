@@ -46,7 +46,6 @@ class App extends Component {
   handleUpdateCart (productID, amount) {
     let cart = Object.assign({}, this.state.cart)
     cart[productID] = amount
-    console.log(cart)
     this.setState({ cart: cart })
   }
 
