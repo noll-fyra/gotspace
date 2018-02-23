@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-// import constants from '../../constants/constants'
+import constants from '../../constants/constants'
 import styled from 'styled-components'
 
 class CartIcon extends Component {
@@ -15,9 +15,9 @@ class CartIcon extends Component {
     let show = cartArray.length > 0 ? cartArray.reduce((a, b) => a + b, 0) : 0
     return (
       <Container to='/cart'>
-        <div style={{display: 'flex', flexFlow: 'row', alignItems: 'center', backgroundColor: 'white', borderRadius: constants.size.borderRadius.small, width: constants.size.width.smallMedium, paddingTop: constants.size.padding.small, paddingBottom: constants.size.padding.small }}>
-          <div style={{width: '60%', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRight: `2px solid ${constants.colors.darkGrey}`}}><Cart className='fas fa-shopping-bag' /></div>
-          <div style={{width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '0.8em', color: constants.colors.black}}>{show}</div>
+        <div style={{display: 'flex', flexFlow: 'row', alignItems: 'center', backgroundColor: 'white', borderRadius: constants.size.borderRadius.small, width: constants.size.width.smallMedium, paddingTop: constants.size.padding.small, paddingBottom: constants.size.padding.small}}>
+          <div style={{width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRight: `2px solid ${constants.colors.darkGrey}`}}><Cart className='fas fa-shopping-bag' /></div>
+          <div style={{width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '0.8em', color: constants.colors.black}}>{show}</div>
         </div>
       </Container>
     )
