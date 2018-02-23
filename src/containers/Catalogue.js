@@ -23,23 +23,13 @@ class Catalogue extends Component {
           })}
         </ProductNav>
         <Container>
-          <Breado>
-            <div style={{marginRight: constants.size.margin.small, cursor: 'pointer'}} onClick={() => this.setState({category: 'all'})}>All</div>
-            {this.state.category !== 'all' &&
-            <div style={{display: 'flex', flexFlow: 'row'}}>
-              <div style={{marginRight: constants.size.margin.small}}>></div>
-              <div onClick={() => this.setState({category: this.state.category})} style={{cursor: 'pointer'}}>{this.state.category}</div>
-            </div>
-            }
-          </Breado>
-
           {filtered.length > 0
             ? <Cards>
-              {filtered.map(product => {
-                return <CardDiv key={product.product_id}>
+              {filtered.map(product =>
+                <CardDiv key={product.product_id}>
                   <ProductCard product={product} count={this.props.cart[product.product_id]} handleUpdateCart={this.props.handleUpdateCart} />
                 </CardDiv>
-              })}
+              )}
               {(filtered.length - 2) % 3 === 0 && <CardDiv />}
             </Cards>
             : <div style={{textAlign: 'center'}}>Oops! We did not find any products.</div>
@@ -94,11 +84,11 @@ const Container = styled.div`
   padding: ${constants.size.padding.large} ${constants.size.padding.media};
 `
 
-const Breado = styled.div`
-  display: flex;
-  flex-flow: row;
-  margin-bottom: ${constants.size.margin.large};
-`
+// const Breado = styled.div`
+//   display: flex;
+//   flex-flow: row;
+//   margin-bottom: ${constants.size.margin.large};
+// `
 
 const Cards = styled.div`
   width: 100%;

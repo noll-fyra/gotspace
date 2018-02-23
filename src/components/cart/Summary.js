@@ -84,8 +84,7 @@ Summary.propTypes = {
   // products: PropTypes.arrayOf(PropTypes.object).isRequired,
   productsList: PropTypes.object.isRequired,
   cart: PropTypes.object.isRequired,
-  handleUpdateCart: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.object).isRequired
+  handleUpdateCart: PropTypes.func.isRequired
 }
 
 const Container = styled.div`

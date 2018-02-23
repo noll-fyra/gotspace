@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ProductCard from '../product/ProductCard'
+import constants from '../../constants/constants'
 import styled from 'styled-components'
 
 class Recommendation extends Component {
@@ -9,11 +11,17 @@ class Recommendation extends Component {
   }
 
   render () {
-    // let { productsList, options, handleUpdateCart } = this.props
+    let { productsList, cart, handleUpdateCart, loading, recommendations } = this.props
 
     return (
       <Container>
         <Top><h4>RECOMMENDATIONS</h4></Top>
+        {recommendations.map(product =>
+        <CardDiv key={product.product_id}>
+          <ProductCard product={productsList[product.product_id]} count={cart[product.product_id]} handleUpdateCart={handleUpdateCart} />
+        </CardDiv>
+    )
+    }
       </Container>
     )
   }
@@ -21,13 +29,15 @@ class Recommendation extends Component {
 
 Recommendation.propTypes = {
   productsList: PropTypes.object.isRequired,
-  options: PropTypes.array.isRequired,
-  handleUpdateCart: PropTypes.func.isRequired
+  cart: PropTypes.object.isRequired,
+  handleUpdateCart: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  recommendations: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const Container = styled.div`
   width: 100%;
-  height: 48%;
+  height: 49%;
   border: 1px solid lightGrey;
   padding: 12px;
   border-radius: 8px;
@@ -38,6 +48,11 @@ const Top = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+`
+
+const CardDiv = styled.div`
+  width: 32%;
+  margin-bottom: ${constants.size.padding.medium};
 `
 
 export default Recommendation

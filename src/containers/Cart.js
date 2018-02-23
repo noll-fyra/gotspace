@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import Recommendation from '../components/cart/Recommendation'
 import Summary from '../components/cart/Summary'
-import constants from '../constants/constants'
+import Address from '../components/cart/Address'
 import styled from 'styled-components'
 
 class Cart extends Component {
@@ -14,7 +14,9 @@ class Cart extends Component {
       destinationCountry: 'SG',
       originPostalCode: '389779',
       destinationPostalCode: '277993',
-      declaredCurrency: 'SGD'
+      declaredCurrency: 'SGD',
+      recommendations: [],
+      loading: false
     }
     this.fetchRecommendations = this.fetchRecommendations.bind(this)
   }
@@ -28,6 +30,7 @@ class Cart extends Component {
     function convertForAPI (arr) {
       return arr.map(item => {
         let temp = {}
+        temp.product_id = item.product_id
         temp.title = item.title
         temp.description = item.description
         temp.actual_weight = parseFloat(item.weight)
@@ -59,34 +62,27 @@ class Cart extends Component {
     data.order = order
     data.catalog = convertForAPI(this.props.products)
 
+    this.setState({ loading: true })
     axios.post(api, JSON.stringify(data), {headers: {'content-type': 'application/json'}})
-    .then(res => {
-      console.log(res)
+    .then(res => { console.log(res.data); this.setState({ recommendations: res.data, loading: false }) })
+    .catch(err => {
+      console.error(err)
+      this.setState({ loading: false })
     })
-    .catch(err => console.error(err))
   }
 
   render () {
-    let { products, productsList, cart, handleUpdateCart, options } = this.props
+    let { products, productsList, cart, handleUpdateCart } = this.props
 
     return (
       <Container>
         <LeftContainer>
-          <AddressDiv>
-            <h2>Shipping Address</h2>
-            <Address>
-              <b>Smile Person</b><br />
-              2 Stamford Road<br />
-              Level 70 Equinox Complex, Downtown Core<br />
-              Singapore 178882<br />
-            </Address>
-          </AddressDiv>
-          <Recommendation productsList={productsList} options={products} handleUpdateCart={handleUpdateCart} />
-
+          <Address />
+          <Recommendation productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} loading={this.state.loading} recommendations={this.state.recommendations} />
         </LeftContainer>
 
         <SummaryContainer>
-          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} options={options} />
+          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} />
         </SummaryContainer>
       </Container>
     )
@@ -97,8 +93,7 @@ Cart.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   productsList: PropTypes.object.isRequired,
   cart: PropTypes.object.isRequired,
-  handleUpdateCart: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.object).isRequired
+  handleUpdateCart: PropTypes.func.isRequired
 }
 
 const Container = styled.main`
@@ -109,21 +104,11 @@ const Container = styled.main`
 const LeftContainer = styled.div`
   width: 60%;
   height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
   padding: 12px;
   padding-right: 0;
-`
-
-const AddressDiv = styled.div`
-  width: 100%;
-  padding: ${constants.size.padding.large};
-`
-
-const Address = styled.div`
-  border: 1px solid black;
-  border-radius: ${constants.size.borderRadius.small};
-  font-family: 'Muli';
-  padding: ${constants.size.padding.medium};
-  margin-top: ${constants.size.margin.small};
 `
 
 const SummaryContainer = styled.div`
