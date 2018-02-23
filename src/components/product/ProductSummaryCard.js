@@ -11,17 +11,17 @@ class ProductSummaryCard extends Component {
     let { product, count, handleUpdateCart } = this.props
     return (
       <Container>
-        <Image src={product.image} alt={product.title} />
+        <Image src={product.image ? product.image : 'https://i.imgur.com/e2Xhr9V.png'} alt={product.title} />
         <Info>
           <Title>{product.title.toUpperCase()}</Title>
           <Category>{product.category_name.toUpperCase()}</Category>
           <Cost>
             <div style={{display: 'flex', alignItems: 'center'}}>
-              <PlusMinus onClick={() => { console.log('minus'); handleUpdateCart(product.product_id, count - 1) }}>
+              <PlusMinus onClick={() => handleUpdateCart(product.product_id, count - 1)}>
                 <i className='fas fa-minus-circle' />
               </PlusMinus>
               <Count><span style={{color: 'grey', fontSize: '0.8em'}}>x</span> {this.formatCount(this.props.count)}</Count>
-              <PlusMinus onClick={() => { console.log('plus'); handleUpdateCart(product.product_id, count + 1) }}>
+              <PlusMinus onClick={() => handleUpdateCart(product.product_id, count + 1)}>
                 <i className='fas fa-plus-circle' />
               </PlusMinus>
             </div>

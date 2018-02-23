@@ -15,9 +15,9 @@ class CartIcon extends Component {
     let show = cartArray.length > 0 ? cartArray.reduce((a, b) => a + b, 0) : 0
     return (
       <Container to='/cart'>
-        <div style={{display: 'flex', flexFlow: 'row', alignItems: 'center', backgroundColor: 'white', borderRadius: constants.size.borderRadius.small, width: constants.size.width.smallMedium, paddingTop: constants.size.padding.small, paddingBottom: constants.size.padding.small}}>
-          <div style={{width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRight: `2px solid ${constants.colors.darkGrey}`}}><Cart className='fas fa-shopping-bag' /></div>
-          <div style={{width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '0.8em', color: constants.colors.black}}>{show}</div>
+        <div style={{display: 'flex', flexFlow: 'row', alignItems: 'center', backgroundColor: 'white', borderRadius: constants.size.borderRadius.small, width: constants.size.width.smallMedium, paddingTop: constants.size.padding.small, paddingBottom: constants.size.padding.small }}>
+          <div style={{width: '55%', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRight: `2px solid ${constants.colors.darkGrey}`}}><Cart className='fas fa-shopping-bag' /></div>
+          <div style={{width: '45%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '0.8em', color: constants.colors.black}}>{show}</div>
         </div>
       </Container>
     )

@@ -27,7 +27,7 @@ Recommendation.propTypes = {
 
 const Container = styled.div`
   width: 100%;
-  height: 50%;
+  height: 48%;
   border: 1px solid lightGrey;
   padding: 12px;
   border-radius: 8px;
