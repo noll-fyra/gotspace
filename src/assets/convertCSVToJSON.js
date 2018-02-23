@@ -1,6 +1,6 @@
 let products = require('./products.json')
 
-let updatedProducts = products.map(item => {
+let updatedProducts = products.slice(0, 500).map(item => {
   let temp = {}
   temp.product_id = item.product_id
   temp.title = item.title
@@ -14,7 +14,7 @@ let updatedProducts = products.map(item => {
   return temp
 })
 
-require('fs').writeFile('./updatedProducts.json', JSON.stringify(updatedProducts), err => {
+require('fs').writeFile('./updated500Products.json', JSON.stringify(updatedProducts), err => {
   if (err) throw err
   console.log('The file has been saved!')
 })
