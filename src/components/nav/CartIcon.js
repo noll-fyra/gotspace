@@ -7,19 +7,8 @@ import styled from 'styled-components'
 class CartIcon extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      cart: []    
-    }
+    this.state = {}
   }
-
-  componentWillMount() {
-    this.setState({cart: Object.values(this.props.cart)})
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // this.setState({cart: cartArray}, function(){console.log(this.state.cart)})
-  }
-  // cartArray.length > 0 ? cartArray.reduce((a, b) => a + b) : 0
 
   render () {
     let cartArray = Object.values(this.props.cart)
@@ -35,7 +24,7 @@ class CartIcon extends Component {
   }
 }
 
-CartIcon.PropTypes = {
+CartIcon.propTypes = {
   cart: PropTypes.object.isRequired
 }
 

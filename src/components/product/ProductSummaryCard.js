@@ -15,10 +15,10 @@ class ProductSummaryCard extends Component {
           <Title>{product.title.toUpperCase()}</Title>
           <Category>{product.category_name.toUpperCase()}</Category>
           <Cost>
-            <div style={{display: 'flex'}}>
-              <Count onClick={() => handleUpdateCart(product.product_id, count - 1)}>-</Count>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              <PlusMinus className='fas fa-minus-circle' onClick={() => handleUpdateCart(product.product_id, count - 1)} />
               <Count><span style={{color: 'grey', fontSize: '0.8em'}}>x</span> {this.formatCount(this.props.count)}</Count>
-              <Count onClick={() => handleUpdateCart(product.product_id, count + 1)}>+</Count>
+              <PlusMinus className='fas fa-plus-circle' onClick={() => handleUpdateCart(product.product_id, count + 1)} />
             </div>
             <Price><span style={{color: 'grey', fontSize: '0.8em'}}>$</span>{(parseFloat(product.price) * count).toFixed(2)}</Price>
           </Cost>
@@ -28,7 +28,7 @@ class ProductSummaryCard extends Component {
   }
 }
 
-ProductSummaryCard.PropTypes = {
+ProductSummaryCard.propTypes = {
   product: PropTypes.object.isRequired,
   count: PropTypes.number.isRequired,
   handleUpdateCart: PropTypes.func.isRequired
@@ -87,6 +87,13 @@ const Cost = styled.div`
 
 const Count = styled.h3`
   font-weight: lighter;
+`
+
+const PlusMinus = styled.h2`
+  font-size: 0.8em;
+  color: grey;
+  cursor: pointer;
+  margin: 0 8px;
 `
 
 const Price = styled.h3`
