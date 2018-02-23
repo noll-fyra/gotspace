@@ -16,7 +16,6 @@ class Catalogue extends Component {
             return <Category>{category.toUpperCase()}</Category>
           })}
         </ProductNav>
-        
       </Main>
     )
   }
@@ -24,7 +23,8 @@ class Catalogue extends Component {
 
 Catalogue.PropTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleUpdateCart: PropTypes.func.isRequired
 }
 
 const Main = styled.div`

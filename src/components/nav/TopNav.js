@@ -18,6 +18,7 @@ class TopNav extends Component {
         </Third>
         <Third style={{justifyContent: 'flex-end'}}>
           <CartIcon cart={this.props.cart} />
+          <User className='far fa-user-circle' />
         </Third>
       </Container>
     )
@@ -50,6 +51,11 @@ const Logo = styled.h1`
 
 const NavLink = styled(Link)`
   padding: 24px;
+`
+
+const User = styled.span`
+  font-size: 32px;
+  margin-left: 12px;
 `
 
 export default TopNav

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ProductPaymentCard from '../components/product/ProductPaymentCard'
+// import ProductPaymentCard from '../components/product/ProductPaymentCard'
 import styled from 'styled-components'
 
 class Checkout extends Component {
@@ -9,15 +9,15 @@ class Checkout extends Component {
     this.state = {}
   }
   render () {
-    let { products, cart } = this.props
+    // let { products, cart } = this.props
     return (
       <Container>
-        <Products>
+        {/* <Products>
           {cart.map(item => <ProductPaymentCard product={products[item]} />)}
         </Products>
         <Summary>
           <h1>Summary</h1>
-        </Summary>
+        </Summary> */}
       </Container>
     )
   }
@@ -25,7 +25,8 @@ class Checkout extends Component {
 
 Checkout.PropTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleUpdateCart: PropTypes.func.isRequired
 }
 
 const Container = styled.main`
