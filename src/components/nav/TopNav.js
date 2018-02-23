@@ -11,6 +11,7 @@ class TopNav extends Component {
       <Container>
         <Third style={{justifyContent: 'flex-start'}}>
           <Logo>Got Space?</Logo>
+          <div>{JSON.stringify(Object.values(this.props.cart))}</div>
         </Third>
         <Third>
           <NavLink to='/catalogue'>Catalogue</NavLink>
@@ -27,7 +28,7 @@ class TopNav extends Component {
 }
 
 TopNav.PropTypes = {
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired
+  cart: PropTypes.object.isRequired
 }
 
 const Container = styled.nav`

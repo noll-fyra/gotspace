@@ -17,27 +17,29 @@ class ProductCard extends Component {
   }
 
   handleAdd() {
-    if (!this.state.added) {
-      this.setState({added: true})
-      this.props.handleUpdateCart(this.props.product.id, 1)
-    } else {
-      let currentCount = this.state.count
-      currentCount += 1
-      this.setState({count: currentCount})
-      this.props.handleUpdateCart(this.props.product.id, currentCount)
-    }
+    this.props.handleUpdateCart(this.props.product.product_id, (this.props.count || 0) + 1)
+    // if (!this.state.added) {
+    //   this.setState({added: true})
+    //   this.props.handleUpdateCart(this.props.product.product_id, 1)
+    // } else {
+    //   let currentCount = this.state.count
+    //   currentCount += 1
+    //   this.setState({count: currentCount})
+    //   this.props.handleUpdateCart(this.props.product.product_id, currentCount)
+    // }
   }
 
   handleSubtract() {
-    if (this.state.count === 1) {
-      this.setState({added: false})
-      this.props.handleUpdateCart(this.props.product.id, 0)
-    } else {
-      let currentCount = this.state.count
-      currentCount -= 1
-      this.setState({count: currentCount})
-      this.props.handleUpdateCart(this.props.product.id, currentCount)
-    }
+    this.props.handleUpdateCart(this.props.product.product_id, (this.props.count || 0) - 1)
+    // if (this.state.count === 1) {
+    //   this.setState({added: false})
+    //   this.props.handleUpdateCart(this.props.product.product_id, 0)
+    // } else {
+    //   let currentCount = this.state.count
+    //   currentCount -= 1
+    //   this.setState({count: currentCount})
+    //   this.props.handleUpdateCart(this.props.product.product_id, currentCount)
+    // }
   }
 
   shorten (title, type) {
@@ -79,13 +81,13 @@ class ProductCard extends Component {
             <Description>{this.shorten(this.props.product.description, 'description')}</Description>
           </div>
           <div style={{display: 'flex',flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'baseline', }}>
-          {this.state.added ?
+          {this.props.count > 0 ?
             <ButtonAdd>
-              <Inner onClick={() => this.handleSubtract()}><i className='fas fa-minus' /></Inner>
-              <Inner>{this.state.count}</Inner>
-              <Inner onClick={() => this.handleAdd()}><i className='fas fa-plus' /></Inner>
+              <Inner onClick={this.handleSubtract}><i className='fas fa-minus' /></Inner>
+              <Inner>{this.props.count}</Inner>
+              <Inner onClick={this.handleAdd}><i className='fas fa-plus' /></Inner>
             </ButtonAdd> :
-          <Button onClick={() => this.setState({added: true})}>
+          <Button onClick={this.handleAdd}>
             <i className='fas fa-shopping-cart' />&nbsp;&nbsp;Add to cart
           </Button> 
           }
