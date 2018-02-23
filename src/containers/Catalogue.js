@@ -12,7 +12,7 @@ class Catalogue extends Component {
     }
   }
   render () {
-    const filtered = this.state.category === 'all' ? this.props.products : this.props.products.filter(product => {return product.category === this.state.category})
+    const filtered = this.state.category === 'all' ? this.props.products : this.props.products.filter(product => {return product.category_name === this.state.category})
     return (
       <Main>
         <ProductNav>
@@ -37,7 +37,7 @@ class Catalogue extends Component {
           <Cards>
             {filtered.map(product => {
               return <CardDiv key={product.id}>
-                <ProductCard product={product} />
+                <ProductCard product={product} handleUpdateCart={this.props.handleUpdateCart} />
               </CardDiv>
             })}
             {(filtered.length - 2) % 3 === 0 && <CardDiv />}
@@ -52,7 +52,8 @@ class Catalogue extends Component {
 
 Catalogue.PropTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleUpdateCart: PropTypes.func.isRequired
 }
 
 const Main = styled.div`

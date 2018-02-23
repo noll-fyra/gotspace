@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ProductPaymentCard from '../components/product/ProductPaymentCard'
+import Products from '../components/cart/Products'
+import Summary from '../components/cart/Summary'
 import styled from 'styled-components'
 
 class Cart extends Component {
@@ -10,15 +11,16 @@ class Cart extends Component {
   }
   render () {
     let { products, cart } = this.props
+
     return (
       <Container>
-        <Products>
-          {products.map((item, index) => cart[item.id] ? <ProductPaymentCard product={item} count={cart[item.id]} /> : <div />)}
-        </Products>
-        <Summary>
-          <h1 style={{textAlign: 'center'}}>Summary</h1>
-          {/* {products.map(item => <ProductPaymentCard product={products[item]} />)} */}
-        </Summary>
+        <LeftContainer>
+          <Products products={products} cart={cart} />
+        </LeftContainer>
+
+        <SummaryContainer>
+          <Summary products={products} cart={cart} handleUpdateCart={this.props.handleUpdateCart} />
+        </SummaryContainer>
       </Container>
     )
   }
@@ -26,7 +28,8 @@ class Cart extends Component {
 
 Cart.PropTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleUpdateCart: PropTypes.func.isRequired
 }
 
 const Container = styled.main`
@@ -34,18 +37,15 @@ const Container = styled.main`
   height: calc(100vh - 48px);
 `
 
-const Products = styled.div`
+const LeftContainer = styled.div`
   width: 70%;
   height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: auto;
 `
 
-const Summary = styled.div`
+const SummaryContainer = styled.div`
   width: 30%;
   height: 100%;
-  background-color: lightGrey;
+  padding: 12px;
 `
 
 export default Cart

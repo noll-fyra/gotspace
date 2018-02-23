@@ -12,29 +12,30 @@ class ProductCard extends Component {
       count: 1
     }
     this.handleAdd = this.handleAdd.bind(this)
+    this.handleSubtract = this.handleSubtract.bind(this)
   }
 
   handleAdd() {
-    if (!this.added) {
+    if (!this.state.added) {
       this.setState({added: true})
-      this.props.handleProductAdd(this.props.product.id, 1)
+      this.props.handleUpdateCart(this.props.product.id, 1)
     } else {
       let currentCount = this.state.count
       currentCount += 1
       this.setState({count: currentCount})
-      this.props.handleProductAdd(this.props.product.id, currentCount)
+      this.props.handleUpdateCart(this.props.product.id, currentCount)
     }
   }
 
   handleSubtract() {
     if (this.state.count === 1) {
       this.setState({added: false})
-      this.props.handleProductAdd(this.props.product.id, 0)
+      this.props.handleUpdateCart(this.props.product.id, 0)
     } else {
       let currentCount = this.state.count
       currentCount -= 1
       this.setState({count: currentCount})
-      this.props.handleProductAdd(this.props.product.id, currentCount)
+      this.props.handleUpdateCart(this.props.product.id, currentCount)
     }
   }
 
@@ -42,18 +43,18 @@ class ProductCard extends Component {
     return (
       <ProductCardDiv>
         <ImgDiv>
-          <Image src={this.props.product.image} />
+          <Image src={this.props.product.image ? this.props.procuct.image : 'https://i.imgur.com/e2Xhr9V.png'} />
         </ImgDiv>
         <Info>
           <Title>{this.props.product.title.toUpperCase()}</Title>
-          <Price>${this.props.product.price.toFixed(2)}</Price>
+          {/*<Price>${this.props.product.price.toFixed(2)}</Price>*/}
           <Description>{this.props.product.description}</Description>
           {this.state.added ?
             <ButtonAdd>
-              <Inner><i className='fas fa-minus' /></Inner>
+              <Inner onClick={() => this.handleSubtract()}><i className='fas fa-minus' /></Inner>
               <Inner>{this.state.count}</Inner>
-              <Inner><i className='fas fa-plus' /></Inner>
-            </ButtonAdd>
+              <Inner onClick={() => this.handleAdd()}><i className='fas fa-plus' /></Inner>
+            </ButtonAdd> :
           <Button onClick={() => this.setState({added: true})}>
             <i className='fas fa-shopping-cart' />&nbsp;&nbsp;Add to cart
           </Button> 

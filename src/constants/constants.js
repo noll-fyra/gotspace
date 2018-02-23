@@ -74,7 +74,8 @@ const constants = {
       'Textbooks',
       'Home & Furniture',
       'Kitchen & Appliances',
-      'Car Accessories'
+      'Car Accessories',
+      'Electronics'
     ],
     priceRange: [
       '$',
