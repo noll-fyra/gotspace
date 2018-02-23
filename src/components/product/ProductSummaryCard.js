@@ -10,7 +10,7 @@ class ProductSummaryCard extends Component {
     let { product, count, handleUpdateCart } = this.props
     return (
       <Container>
-        <Image src={product.image} alt={product.title} />
+        <Image src={product.image ? product.image : 'https://i.imgur.com/e2Xhr9V.png'} alt={product.title} />
         <Info>
           <Title>{product.title.toUpperCase()}</Title>
           <Category>{product.category_name.toUpperCase()}</Category>
