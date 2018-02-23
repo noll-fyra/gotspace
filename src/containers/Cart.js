@@ -10,7 +10,7 @@ class Cart extends Component {
     this.state = {}
   }
   render () {
-    let { products, cart } = this.props
+    let { products, productsList, cart, handleUpdateCart, options } = this.props
 
     return (
       <Container>
@@ -19,17 +19,19 @@ class Cart extends Component {
         </LeftContainer>
 
         <SummaryContainer>
-          <Summary products={products} cart={cart} handleUpdateCart={this.props.handleUpdateCart} />
+          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} options={options} />
         </SummaryContainer>
       </Container>
     )
   }
 }
 
-Cart.PropTypes = {
+Cart.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  productsList: PropTypes.object.isRequired,
   cart: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleUpdateCart: PropTypes.func.isRequired
+  handleUpdateCart: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const Container = styled.main`

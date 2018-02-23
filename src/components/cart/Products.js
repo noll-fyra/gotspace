@@ -22,7 +22,7 @@ class Products extends Component {
 
 Products.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired
+  cart: PropTypes.object.isRequired
 }
 
 const Container = styled.div`

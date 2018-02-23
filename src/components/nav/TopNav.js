@@ -10,14 +10,9 @@ class TopNav extends Component {
     return (
       <Container>
         <Third style={{justifyContent: 'flex-start'}}>
-          <Logo>Got Space?</Logo>
-          <div>{JSON.stringify(Object.values(this.props.cart))}</div>
+          <Logo to='/'>Got Space?</Logo>
         </Third>
-        <Third>
-          <NavLink to='/catalogue'>Catalogue</NavLink>
-
-          <NavLink to='/checkout'>Checkout</NavLink>
-        </Third>
+        <Third />
         <Third style={{justifyContent: 'flex-end'}}>
           <CartIcon cart={this.props.cart} />
           <User className='far fa-user-circle' />
@@ -27,7 +22,7 @@ class TopNav extends Component {
   }
 }
 
-TopNav.PropTypes = {
+TopNav.propTypes = {
   cart: PropTypes.object.isRequired
 }
 
@@ -51,18 +46,12 @@ const Third = styled.div`
   padding: 12px;
 `
 
-const Logo = styled.h1`
+const Logo = styled(Link)`
   font-family: 'Bungee';
   font-size: 2em;
   color: ${constants.colors.white};
   letter-spacing: 1px;
-`
-
-const NavLink = styled(Link)`
-  padding: 24px;
-  color: ${constants.colors.white};
   text-decoration: none;
-  font-family: 'Muli';
 `
 
 const User = styled.span`

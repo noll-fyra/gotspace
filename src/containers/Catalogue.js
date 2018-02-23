@@ -53,6 +53,7 @@ class Catalogue extends Component {
 
 Catalogue.PropTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  productsList: PropTypes.object.isRequired,
   cart: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleUpdateCart: PropTypes.func.isRequired
 }
