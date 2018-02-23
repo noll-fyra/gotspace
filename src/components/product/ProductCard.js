@@ -75,7 +75,7 @@ class ProductCard extends Component {
         <Info>
           <div>
             <Title>{this.shorten(this.props.product.title.toUpperCase(), 'title')}</Title>
-            {/*<Price>${this.props.product.price.toFixed(2)}</Price>*/}
+            <Price>${parseInt(this.props.product.price, 10).toFixed(2)}</Price>
             <Description>{this.shorten(this.props.product.description, 'description')}</Description>
           </div>
           <div style={{display: 'flex',flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'baseline', }}>
@@ -118,7 +118,7 @@ const Image = styled.img`
 `
 
 const Info = styled.div`
-  min-height: 120px;
+  height: 150px;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
@@ -160,7 +160,6 @@ const Button = styled.div`
   font-family: 'Muli';
   font-size: 0.9em;
   flex-wrap: wrap;
-  align-items: baseline;
 
   &: hover {
     background-color: ${constants.colors.omnivore}
@@ -170,6 +169,7 @@ const Button = styled.div`
 const ButtonAdd = Button.extend`
   justify-content: space-between;
   flex-flow: row;
+  align-items: baseline;
 
   &: hover {
     background-color: ${constants.colors.brand}
@@ -182,7 +182,7 @@ const Inner = styled.div`
   justify-content: center;
   align-items: center;
   color: ${constants.colors.white};
-  font-size: 1.2em;
+  font-size: 1.1em;
 `
 
 export default ProductCard

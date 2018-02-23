@@ -35,6 +35,10 @@ const Container = styled.nav`
   height: 48px;
   box-shadow: 0px 1px 1px 2px #eeeeee;
   background-image: url('https://i.imgur.com/aASzm5m.jpg');
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 20;
 `
 
 const Third = styled.div`
@@ -56,6 +60,8 @@ const Logo = styled.h1`
 const NavLink = styled(Link)`
   padding: 24px;
   color: ${constants.colors.white};
+  text-decoration: none;
+  font-family: 'Muli';
 `
 
 const User = styled.span`

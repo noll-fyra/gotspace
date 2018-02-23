@@ -62,14 +62,18 @@ const Main = styled.div`
 `
 
 const ProductNav = styled.div`
+  height: ${constants.size.height.small};
+  width: 100vw;
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
   padding: ${constants.size.padding.small} ${constants.size.padding.media};
   background-color: #B9F0FFFF;
-  height: ${constants.size.height.small};
-  width: 100vw;
+  top: 48px;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 20;
 `
 
 const Category = styled.div`
