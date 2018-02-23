@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import Catalogue from './containers/Catalogue'
+import Cart from './containers/Cart'
+import Checkout from './containers/Checkout'
 
 class App extends Component {
-  render() {
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <Router>
+        <Switch>
+          <Route exact path='/' render={() => <Redirect to='/catalogue' />} />
+          <Route path='/catalogue' render={(props) => <Catalogue {...props} />} />
+          <Route path='/cart' render={(props) => <Cart {...props} />} />
+          <Route path='/checkout' render={(props) => <Checkout {...props} />} />
+        </Switch>
+      </Router>
+    )
   }
 }
 
-export default App;
+export default App
