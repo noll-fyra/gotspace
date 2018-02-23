@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import styled from 'styled-components'
+import constants from '../constants/constants'
+import styled from 'styled-components'
 
 class Catalogue extends Component {
   constructor (props) {
@@ -9,7 +10,7 @@ class Catalogue extends Component {
   }
   render () {
     return (
-      <div>Catalogue Page</div>
+      <Main>Catalogue Page</Main>
     )
   }
 }
@@ -18,5 +19,9 @@ Catalogue.PropTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   cart: PropTypes.arrayOf(PropTypes.object).isRequired
 }
+
+const Main = styled.div`
+  padding: ${constants.size.padding.large} ${constants.size.padding.media};
+`
 
 export default Catalogue
