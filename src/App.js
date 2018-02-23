@@ -22,7 +22,7 @@ class App extends Component {
 
   componentWillMount () {
     this.convertProductsToObject()
-    // this.loadRandomCart()
+    this.loadRandomCart(1)
   }
 
   convertProductsToObject () {
@@ -31,13 +31,13 @@ class App extends Component {
     this.setState({ productsList: obj })
   }
 
-  loadRandomCart () {
+  loadRandomCart (count) {
     let temp = {}
     let length = products.length
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < count; i++) {
       let random = Math.floor(Math.random() * length)
       let product = products[random]
-      temp[product.product_id] = Math.floor(Math.random() * 5)
+      temp[product.product_id] = 1
     }
     this.setState({ cart: temp })
   }

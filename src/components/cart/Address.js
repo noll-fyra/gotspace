@@ -30,7 +30,7 @@ Address.propTypes = {}
 
 const Container = styled.div`
   width: 100%;
-  height: 49%;
+  height: 29%;
   border: 1px solid lightGrey;
   padding: 12px;
   border-radius: 8px;

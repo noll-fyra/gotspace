@@ -34,7 +34,8 @@ class Summary extends Component {
 
   render () {
     let { cart, handleUpdateCart } = this.props
-    let count = Object.values(cart).reduce((a, b) => a + b)
+
+    let count = Object.values(cart).length > 0 ? Object.values(cart).reduce((a, b) => a + b) : 0
     return (
       <Container>
         <Top>

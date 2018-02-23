@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductCard from '../product/ProductCard'
-import constants from '../../constants/constants'
 import styled from 'styled-components'
 
 class Recommendation extends Component {
@@ -11,17 +10,22 @@ class Recommendation extends Component {
   }
 
   render () {
-    let { productsList, cart, handleUpdateCart, loading, recommendations } = this.props
+    let { productsList, cart, handleUpdateCart, recommendations } = this.props
 
     return (
       <Container>
-        <Top><h4>RECOMMENDATIONS</h4></Top>
-        {recommendations.map(product =>
-        <CardDiv key={product.product_id}>
-          <ProductCard product={productsList[product.product_id]} count={cart[product.product_id]} handleUpdateCart={handleUpdateCart} />
-        </CardDiv>
+        <Top>
+          <h4>RECOMMENDATIONS</h4>
+          <div>{recommendations.length} Items</div>
+        </Top>
+        <RecDiv>
+          {recommendations.slice(0, 8).map(product =>
+            <CardDiv key={product.product_id}>
+              <ProductCard product={productsList[product.product_id]} count={cart[product.product_id] || 0} handleUpdateCart={handleUpdateCart} smaller />
+            </CardDiv>
     )
     }
+        </RecDiv>
       </Container>
     )
   }
@@ -37,7 +41,7 @@ Recommendation.propTypes = {
 
 const Container = styled.div`
   width: 100%;
-  height: 49%;
+  height: 69%;
   border: 1px solid lightGrey;
   padding: 12px;
   border-radius: 8px;
@@ -50,9 +54,17 @@ const Top = styled.div`
   align-items: baseline;
 `
 
+const RecDiv = styled.div`
+  width: 100%;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+`
+
 const CardDiv = styled.div`
-  width: 32%;
-  margin-bottom: ${constants.size.padding.medium};
+  width: 40%;
+  min-width: 40%;
+  margin-right: 8px;
 `
 
 export default Recommendation

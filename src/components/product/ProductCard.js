@@ -48,10 +48,10 @@ class ProductCard extends Component {
   }
 
   render () {
-    let { product, count } = this.props
+    let { product, count, smaller } = this.props
     return (
       <ProductCardDiv>
-        <ImgDiv>
+        <ImgDiv smaller={smaller}>
           <Image src={picture} />
         </ImgDiv>
         <Info>
@@ -78,9 +78,10 @@ class ProductCard extends Component {
   }
 }
 
-ProductCard.PropTypes = {
+ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
-  count: PropTypes.number.isRequired
+  count: PropTypes.number.isRequired,
+  smaller: PropTypes.bool
 }
 
 const ProductCardDiv = styled.div`
@@ -91,7 +92,7 @@ const ProductCardDiv = styled.div`
 
 const ImgDiv = styled.div`
   width: 100%;
-  height: 300px;
+  height: ${props => props.smaller ? '200px' : '300px'};
 `
 
 const Image = styled.img`

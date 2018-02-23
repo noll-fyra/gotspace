@@ -11,6 +11,7 @@ class Catalogue extends Component {
       category: 'all'
     }
   }
+
   render () {
     const filtered = this.state.category === 'all' ? this.props.products : this.props.products.filter(product => { return product.category_name === this.state.category })
     return (
@@ -27,7 +28,7 @@ class Catalogue extends Component {
             ? <Cards>
               {filtered.map(product =>
                 <CardDiv key={product.product_id}>
-                  <ProductCard product={product} count={this.props.cart[product.product_id]} handleUpdateCart={this.props.handleUpdateCart} />
+                  <ProductCard product={product} count={this.props.cart[product.product_id] || 0} handleUpdateCart={this.props.handleUpdateCart} />
                 </CardDiv>
               )}
               {(filtered.length - 2) % 3 === 0 && <CardDiv />}
@@ -40,10 +41,10 @@ class Catalogue extends Component {
   }
 }
 
-Catalogue.PropTypes = {
+Catalogue.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   productsList: PropTypes.object.isRequired,
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cart: PropTypes.object.isRequired,
   handleUpdateCart: PropTypes.func.isRequired
 }
 
