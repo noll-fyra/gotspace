@@ -4,7 +4,7 @@ import TopNav from './components/nav/TopNav'
 import Catalogue from './containers/Catalogue'
 import Cart from './containers/Cart'
 import Checkout from './containers/Checkout'
-import products from './assets/updatedProducts.json'
+import products from './assets/products.json'
 
 class App extends Component {
   constructor (props) {
@@ -14,7 +14,22 @@ class App extends Component {
       cart: {},
       options: []
     }
+    this.loadRandomCart = this.loadRandomCart.bind(this)
     this.handleUpdateCart = this.handleUpdateCart.bind(this)
+  }
+
+  componentWillMount () {
+    this.loadRandomCart()
+  }
+
+  loadRandomCart () {
+    let temp = {}
+    for (var i = 0; i < 10; i++) {
+      let random = Math.floor(Math.random() * products.length)
+      let product = products[random]
+      temp[product.product_id] = Math.floor(Math.random() * 5)
+    }
+    this.setState({ cart: temp })
   }
 
   handleUpdateCart (productID, amount) {

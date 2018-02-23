@@ -14,7 +14,7 @@ class Products extends Component {
 
     return (
       <Container>
-        {products.map((item, index) => cart[item.id] ? <ProductPaymentCard product={item} count={cart[item.id]} /> : <div />)}
+        {/* {products.map((item, index) => cart[item.id] ? <ProductPaymentCard product={item} count={cart[item.id]} /> : <div />)} */}
       </Container>
     )
   }
