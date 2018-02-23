@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import constants from '../../constants/constants'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 class ProductCard extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
+    this.state = {}
   }
 
-  render() {
+  render () {
     return (
       <ProductCardDiv>
         <ImgDiv>
@@ -18,8 +20,12 @@ class ProductCard extends Component {
           <Description>{this.props.product.description}</Description>
         </Info>
       </ProductCardDiv>
-    );
+    )
   }
+}
+
+ProductCard.PropTypes = {
+  product: PropTypes.object.isRequired
 }
 
 const ProductCardDiv = styled.div`
@@ -54,4 +60,4 @@ const Description = styled.div`
   color: ${constants.colors.grey};
 `
 
-export default ProductCard;
+export default ProductCard

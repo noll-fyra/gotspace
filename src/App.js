@@ -10,9 +10,9 @@ class App extends Component {
     super(props)
     this.state = {
       products: [
-        {id: 1, item: 'car', price: 3.2},
-        {id: 2, item: 'phone', price: 4.7},
-        {id: 3, item: 'donkey', price: 1.1}
+        {id: 1, title: 'car', price: 3.2, description: 'This is a car', image: ''},
+        {id: 2, title: 'phone', price: 4.7, description: 'This is a phone', image: ''},
+        {id: 3, title: 'donkey', price: 1.1, description: 'This is a donkey', image: ''}
       ],
       cart: {1: 3, 2: 1, 3: 0}
     }
