@@ -6,6 +6,7 @@ class ProductSummaryCard extends Component {
   formatCount (count) {
     return count < 10 ? '0' + count.toString() : count
   }
+
   render () {
     let { product, count, handleUpdateCart } = this.props
     return (
@@ -16,9 +17,13 @@ class ProductSummaryCard extends Component {
           <Category>{product.category_name.toUpperCase()}</Category>
           <Cost>
             <div style={{display: 'flex', alignItems: 'center'}}>
-              <PlusMinus className='fas fa-minus-circle' onClick={() => handleUpdateCart(product.product_id, count - 1)} />
+              <PlusMinus onClick={() => handleUpdateCart(product.product_id, count - 1)}>
+                <i className='fas fa-minus-circle' />
+              </PlusMinus>
               <Count><span style={{color: 'grey', fontSize: '0.8em'}}>x</span> {this.formatCount(this.props.count)}</Count>
-              <PlusMinus className='fas fa-plus-circle' onClick={() => handleUpdateCart(product.product_id, count + 1)} />
+              <PlusMinus onClick={() => handleUpdateCart(product.product_id, count + 1)}>
+                <i className='fas fa-plus-circle' />
+              </PlusMinus>
             </div>
             <Price><span style={{color: 'grey', fontSize: '0.8em'}}>$</span>{(parseFloat(product.price) * count).toFixed(2)}</Price>
           </Cost>
@@ -89,7 +94,7 @@ const Count = styled.h3`
   font-weight: lighter;
 `
 
-const PlusMinus = styled.h2`
+const PlusMinus = styled.span`
   font-size: 0.8em;
   color: grey;
   cursor: pointer;
