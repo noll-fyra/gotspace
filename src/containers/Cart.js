@@ -129,7 +129,7 @@ class Cart extends Component {
   }
 
   refetch () {
-    this.active = 2
+    this.setState({ active: 2 })
     this.fetchShipping()
   }
 
