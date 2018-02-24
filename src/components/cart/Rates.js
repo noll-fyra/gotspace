@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CourierCard from '../courier/CourierCard'
+import constants from '../../constants/constants'
 import styled from 'styled-components'
 
 class Rates extends Component {
@@ -23,8 +24,8 @@ class Rates extends Component {
             ? <div>{addressSelected ? 'Fetching EasyShip options...' : 'Choose a delivery address'}</div>
             : rates.map((courier, index) =>
               <CourierCard key={index} courier={courier} selectCourier={selectCourier} index={index} />
-    )
-    }
+         )
+        }
         </RatesDiv>
         }
       </Container>

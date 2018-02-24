@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 class CourierCard extends Component {
+  componentDidMount() {
+    console.log(this.props.courier)
+  }
   render () {
     let { courier, selectCourier, index, chosen } = this.props
     return (
