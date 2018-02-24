@@ -35,7 +35,7 @@ class Summary extends Component {
   }
 
   render () {
-    let { cart, handleUpdateCart, courier, isActive, chosenAddress } = this.props
+    let { cart, handleUpdateCart, courier, isActive, chosenAddress, isBest } = this.props
 
     let count = Object.values(cart).length > 0 ? Object.values(cart).reduce((a, b) => a + b) : 0
     return (
@@ -67,7 +67,7 @@ class Summary extends Component {
               #10-01 Mandarin Gallery, Somerset<br />
               Singapore 375894<br />
               </MainAddress>
-             </AddressCard>
+            </AddressCard>
           }
         </div>
         }
@@ -92,7 +92,7 @@ class Summary extends Component {
               {courier &&
               <tr>
                 <td colSpan={2}>
-                  <CourierCard courier={courier} chosen />
+                  <CourierCard courier={courier} chosen isBest={courier.total_charge === Math.min(...rates.map(courier => courier.total_charge))} isBest={isBest} />
                 </td>
               </tr>
               }
@@ -122,7 +122,8 @@ Summary.propTypes = {
   cart: PropTypes.object.isRequired,
   handleUpdateCart: PropTypes.func.isRequired,
   courier: PropTypes.object,
-  isActive: PropTypes.bool.isRequired
+  isActive: PropTypes.bool.isRequired,
+  isBest: PropTypes.bool
 }
 
 const Container = styled.div`

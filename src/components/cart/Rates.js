@@ -19,16 +19,18 @@ class Rates extends Component {
           <h4>2 - CHOOSE A SHIPPING OPTION</h4>
           {addressSelected && !isActive && <i className='fas fa-check-circle' style={{color: constants.colors.vegan, marginTop: constants.size.margin.small}} />}
         </Top>
-        <div style={{textAlign: 'center', fontWeight: 'bold'}}>Pick the "golden" option to get free shipping on recommended items</div>
         {isActive &&
-        <RatesDiv>
-          {ratesLoading
+          <div>
+            <div style={{textAlign: 'center', fontWeight: 'bold', marginBottom: '8px'}}>Pick the "golden" option to get free shipping on recommended items</div>
+            <RatesDiv>
+              {ratesLoading
             ? <div>{addressSelected ? 'Fetching EasyShip options...' : 'Choose a delivery address'}</div>
             : rates.map((courier, index) =>
               <CourierCard key={index} courier={courier} selectCourier={selectCourier} index={index} isBest={courier.total_charge === Math.min(...rates.map(courier => courier.total_charge))} />
     )
     }
-        </RatesDiv>
+            </RatesDiv>
+          </div>
         }
       </Container>
     )
