@@ -5,7 +5,7 @@ import Catalogue from './containers/Catalogue'
 import Cart from './containers/Cart'
 import Checkout from './containers/Checkout'
 // import constants from './constants/constants'
-import products from './assets/productsFinal.json'
+import products from './assets/productsFinal2.json'
 
 class App extends Component {
   constructor (props) {

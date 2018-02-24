@@ -31,6 +31,7 @@ class Cart extends Component {
     this.selectAddress = this.selectAddress.bind(this)
     this.selectCourier = this.selectCourier.bind(this)
     this.setActive = this.setActive.bind(this)
+    this.refetch = this.refetch.bind(this)
   }
 
   componentDidMount () {
@@ -127,6 +128,11 @@ class Cart extends Component {
     })
   }
 
+  refetch () {
+    this.active = 2
+    this.fetchShipping()
+  }
+
   selectAddress (num) {
     this.setState({
       addressSelected: true,
@@ -156,7 +162,7 @@ class Cart extends Component {
         <LeftContainer>
           <Address addressSelected={this.state.addressSelected} selectAddress={this.selectAddress} isActive={this.state.active === 1} />
           <Rates rates={this.state.rates} ratesLoading={this.state.ratesLoading} selectCourier={this.selectCourier} addressSelected={this.state.addressSelected} isActive={this.state.active === 2} />
-          <Recommendation productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} loading={this.state.loading} recommendations={this.state.recommendations} isActive={this.state.active === 3} />
+          <Recommendation productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} loading={this.state.loading} recommendations={this.state.recommendations} isActive={this.state.active === 3} refetch={this.refetch} />
         </LeftContainer>
 
         <SummaryContainer>

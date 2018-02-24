@@ -12,10 +12,11 @@ let updatedProducts = products.slice(0, 200).map((item, index) => {
   temp.length = Math.max(1, Math.floor((Math.random() * 50)))
   temp.height = Math.max(1, Math.floor((Math.random() * 50)))
   temp.clusters = item.clusters
+  temp.image = `https://dummyimage.com/400x400/000/fff&text=${item.title}`
   return temp
 })
 
-require('fs').writeFile('./productsFinal.json', JSON.stringify(updatedProducts), err => {
+require('fs').writeFile('./productsFinal2.json', JSON.stringify(updatedProducts), err => {
   if (err) throw err
   console.log('The file has been saved!')
 })

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import constants from '../../constants/constants'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import picture from '../../assets/default.jpg'
+// import picture from '../../assets/default.jpg'
 import styled from 'styled-components'
 
 class ProductCard extends Component {
@@ -16,6 +16,7 @@ class ProductCard extends Component {
 
   handleAdd () {
     this.props.handleUpdateCart(this.props.product.product_id, (this.props.count || 0) + 1)
+    if (this.props.refetch) { this.props.refetch() }
   }
 
   handleSubtract () {
@@ -53,7 +54,7 @@ class ProductCard extends Component {
     return (
       <ProductCardDiv>
         <ImgDiv smaller={smaller}>
-          <Image src={picture} />
+          <Image src={product.image} />
         </ImgDiv>
         <Info>
           <div>
@@ -88,7 +89,8 @@ class ProductCard extends Component {
 ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
   count: PropTypes.number.isRequired,
-  smaller: PropTypes.bool
+  smaller: PropTypes.bool,
+  refetch: PropTypes.func
 }
 
 const ProductCardDiv = styled.div`

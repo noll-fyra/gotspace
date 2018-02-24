@@ -51,16 +51,16 @@ class Summary extends Component {
 
         {chosenAddress > 0 &&
         <div style={{width: '100%'}}>
-          {chosenAddress === 1 ?
-            <AddressCard>
+          {chosenAddress === 1
+            ? <AddressCard>
               <MainAddress>
                 <b>Smile Person</b><br />
               2 Stamford Road<br />
               Level 70 Equinox Complex, Downtown Core<br />
               Singapore 178882<br />
               </MainAddress>
-            </AddressCard> :
-            <AddressCard>
+            </AddressCard>
+            : <AddressCard>
               <MainAddress>
                 <b>Mumen Dickie</b><br />
               3 Orchard Road<br />
@@ -190,11 +190,11 @@ const MainAddress = styled.div`
   padding: ${constants.size.padding.medium};
 `
 
-const SelectDiv = styled.div`
-  width: 15%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-`
+// const SelectDiv = styled.div`
+//   width: 15%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-end;
+// `
 
 export default Summary

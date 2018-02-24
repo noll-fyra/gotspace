@@ -10,7 +10,7 @@ class Recommendation extends Component {
   }
 
   render () {
-    let { productsList, cart, handleUpdateCart, loading, recommendations, isActive } = this.props
+    let { productsList, cart, handleUpdateCart, loading, recommendations, isActive, refetch } = this.props
 
     return (
       <Container isActive={isActive}>
@@ -24,7 +24,7 @@ class Recommendation extends Component {
             ? <div>Fetching recommendations...</div>
             : recommendations.slice(0, 8).map(product =>
               <CardDiv key={product.product_id}>
-                <ProductCard product={productsList[product.product_id]} count={cart[product.product_id] || 0} handleUpdateCart={handleUpdateCart} />
+                <ProductCard product={productsList[product.product_id]} count={cart[product.product_id] || 0} handleUpdateCart={handleUpdateCart} refetch={refetch} />
               </CardDiv>
     )
     }
@@ -41,7 +41,8 @@ Recommendation.propTypes = {
   handleUpdateCart: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   recommendations: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isActive: PropTypes.bool.isRequired
+  isActive: PropTypes.bool.isRequired,
+  refetch: PropTypes.func.isRequired
 }
 
 const Container = styled.div`
