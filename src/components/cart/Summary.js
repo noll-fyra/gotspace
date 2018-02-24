@@ -130,7 +130,7 @@ const Amount = styled.span`
 const Checkout = styled(Link)`
   width: 100%;
   padding: 8px;
-  background-color: gold;
+  background-color: red;
   font-weight: bold;
   font-size: 1.3em;
   text-align: center;
