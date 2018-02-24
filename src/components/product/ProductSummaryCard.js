@@ -13,8 +13,8 @@ class ProductSummaryCard extends Component {
       <Container>
         <Image src={product.image ? product.image : 'https://i.imgur.com/e2Xhr9V.png'} alt={product.title} />
         <Info>
-          <Title>{product.title.toUpperCase()}</Title>
-          <Category>{product.category.toUpperCase()}</Category>
+          <Title>{product.title}</Title>
+          <Category>{product.category}</Category>
           <Cost>
             <div style={{display: 'flex', alignItems: 'center'}}>
               <PlusMinus onClick={() => handleUpdateCart(product.product_id, count - 1)}>

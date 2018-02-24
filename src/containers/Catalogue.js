@@ -19,7 +19,7 @@ class Catalogue extends Component {
         <ProductNav>
           {constants.lists.categories.map(category => {
             return <Category key={category} onClick={() => this.setState({category: category})} active={this.state.category === category}>
-              {category.toUpperCase()}
+              {category}
             </Category>
           })}
         </ProductNav>

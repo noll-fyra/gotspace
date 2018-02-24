@@ -57,7 +57,7 @@ class ProductCard extends Component {
         </ImgDiv>
         <Info>
           <div>
-            <Title>{this.shorten(product.title.toUpperCase(), 'title')}</Title>
+            <Title>{this.shorten(product.title, 'title')}</Title>
             <Price>${parseFloat(product.price)}</Price>
             <Description>{this.shorten(product.description, 'description')}</Description>
           </div>
