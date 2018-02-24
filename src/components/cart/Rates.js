@@ -17,7 +17,7 @@ class Rates extends Component {
       <Container isActive={isActive}>
         <Top>
           <h4>2 - CHOOSE A SHIPPING OPTION</h4>
-          {addressSelected && !isActive && <i className='fas fa-check-circle' style={{color: constants.colors.vegan}} />}
+          {addressSelected && !isActive && <i className='fas fa-check-circle' style={{color: constants.colors.vegan, marginTop: constants.size.margin.small}} />}
         </Top>
         {isActive &&
           <div>
