@@ -17,6 +17,8 @@ class Address extends Component {
         <Top>
           <h4>1 - CHOOSE A DELIVERY ADDRESS</h4>
         </Top>
+        {isActive &&
+          <div>
         <AddressCard>
           <MainAddress>
             <Saved>SAVED</Saved>
@@ -30,6 +32,8 @@ class Address extends Component {
           </SelectDiv>
         </AddressCard>
         <AddNew><i className='fas fa-plus-circle' style={{marginRight: constants.size.margin.tiny}}/>Add New Address</AddNew>
+        </div>
+        }
       </Container>
     )
   }
@@ -43,11 +47,10 @@ Address.propTypes = {
 
 const Container = styled.div`
   width: 100%;
-  height: ${props => props.isActive ? '70%' : '30%'};
+  height: ${props => props.isActive ? '80%' : '9%'};
   border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;
-  margin-bottom: ${constants.size.margin.medium};
 `
 
 const Top = styled.div`

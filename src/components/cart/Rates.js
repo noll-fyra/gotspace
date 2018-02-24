@@ -17,6 +17,7 @@ class Rates extends Component {
         <Top>
           <h4>2 - CHOOSE A SHIPPING OPTION</h4>
         </Top>
+        {isActive &&
         <RatesDiv>
           {ratesLoading
             ? <div>{addressSelected ? 'Fetching EasyShip options...' : 'Choose a delivery address'}</div>
@@ -25,6 +26,7 @@ class Rates extends Component {
     )
     }
         </RatesDiv>
+        }
       </Container>
     )
   }
@@ -40,7 +42,7 @@ Rates.propTypes = {
 
 const Container = styled.div`
   width: 100%;
-  height: 69%;
+  height: ${props => props.isActive ? '80%' : '9%'};
   border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;
