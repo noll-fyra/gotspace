@@ -18,6 +18,7 @@ class Recommendation extends Component {
           <h4>3 - (OPTIONAL) RECOMMENDATIONS FOR YOU</h4>
           <div>{recommendations.length} Items</div>
         </Top>
+        {isActive &&
         <RecDiv>
           {loading
             ? <div>Fetching recommendations...</div>
@@ -28,6 +29,7 @@ class Recommendation extends Component {
     )
     }
         </RecDiv>
+        }
       </Container>
     )
   }
@@ -44,7 +46,7 @@ Recommendation.propTypes = {
 
 const Container = styled.div`
   width: 100%;
-  height: 69%;
+  height: ${props => props.isActive ? '80%' : '9%'};
   border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;

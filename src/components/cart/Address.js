@@ -18,6 +18,7 @@ class Address extends Component {
           <h4>1 - CHOOSE A DELIVERY ADDRESS</h4>
           <AddNew>Add New Address</AddNew>
         </Top>
+        {isActive &&
         <AddressCard>
           <MainAddress>
             <Saved>SAVED</Saved>
@@ -30,6 +31,7 @@ class Address extends Component {
             <Select onClick={selectAddress} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
           </SelectDiv>
         </AddressCard>
+        }
       </Container>
     )
   }
@@ -43,11 +45,10 @@ Address.propTypes = {
 
 const Container = styled.div`
   width: 100%;
-  height: 29%;
+  height: ${props => props.isActive ? '80%' : '9%'};
   border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;
-  margin-bottom: ${constants.size.margin.medium};
 `
 
 const Top = styled.div`

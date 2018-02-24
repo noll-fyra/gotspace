@@ -46,6 +46,7 @@ class Cart extends Component {
       temp.height = item.height
       temp.width = item.width
       temp.length = item.length
+      temp.clusters = item.clusters
       if (forEasyShip) {
         temp.category = 'mobiles'
         temp.declared_currency = this.state.declaredCurrency
@@ -72,7 +73,7 @@ class Cart extends Component {
     order.destination_postal_code = this.state.destinationPostalCode
     order.items = this.convertForAPI(cartItems)
     data.order = order
-    data.catalog = this.convertForAPI(this.props.products)
+    // data.catalog = this.convertForAPI(this.props.products)
 
     this.setState({ loading: true })
     axios.post(api, JSON.stringify(data), {headers: {'content-type': 'application/json'}})
@@ -135,7 +136,10 @@ class Cart extends Component {
   }
 
   selectCourier (index) {
-    this.setState({ courier: index })
+    this.setState({
+      courier: index,
+      active: 3
+    })
   }
 
   setActive (index) {
@@ -149,14 +153,8 @@ class Cart extends Component {
       <Container>
         <LeftContainer>
           <Address addressSelected={this.state.addressSelected} selectAddress={this.selectAddress} isActive={this.state.active === 1} />
-
-          {this.state.courier < 0 &&
-            <Rates rates={this.state.rates} ratesLoading={this.state.ratesLoading} selectCourier={this.selectCourier} addressSelected={this.state.addressSelected} isActive={this.state.active === 2} />
-          }
-
-          {this.state.addressSelected && !this.state.ratesLoading && this.state.courier > -1 &&
+          <Rates rates={this.state.rates} ratesLoading={this.state.ratesLoading} selectCourier={this.selectCourier} addressSelected={this.state.addressSelected} isActive={this.state.active === 2} />
           <Recommendation productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} loading={this.state.loading} recommendations={this.state.recommendations} isActive={this.state.active === 3} />
-          }
         </LeftContainer>
 
         <SummaryContainer>
