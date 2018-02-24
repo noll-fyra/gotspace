@@ -17,8 +17,7 @@ class Rates extends Component {
       <Container isActive={isActive}>
         <Top>
           <h4>2 - CHOOSE A SHIPPING OPTION</h4>
-          {addressSelected && !isActive && <i className='fas fa-check-circle' style={{color: constants.colors.vegan, marginTop: constants.size.margin.small}} />}
-        </Top>
+          </Top>
         {isActive &&
           <div>
             <div style={{textAlign: 'center', fontWeight: 'bold', marginBottom: '8px'}}>Pick the "golden" option to get free shipping on recommended items</div>
