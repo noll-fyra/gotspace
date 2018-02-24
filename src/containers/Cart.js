@@ -77,7 +77,7 @@ class Cart extends Component {
 
     this.setState({ loading: true })
     axios.post(api, JSON.stringify(data), {headers: {'content-type': 'application/json'}})
-    .then(res => { console.log(res.data); this.setState({ recommendations: res.data, loading: false }) })
+    .then(res => { console.log('recom', res.data); this.setState({ recommendations: res.data, loading: false }) })
     .catch(err => {
       console.error(err)
       // delete data.catalog

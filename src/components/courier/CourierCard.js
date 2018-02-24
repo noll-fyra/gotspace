@@ -4,9 +4,9 @@ import styled from 'styled-components'
 
 class CourierCard extends Component {
   render () {
-    let { courier, selectCourier, index, chosen } = this.props
+    let { courier, selectCourier, index, chosen, isBest } = this.props
     return (
-      <Container chosen={chosen}>
+      <Container chosen={chosen} isBest={isBest}>
         <Name>{courier.courier_name}</Name>
         <Time>{`${courier.min_delivery_time} days to ${courier.max_delivery_time} days`}</Time>
         {!chosen &&
@@ -21,7 +21,8 @@ CourierCard.propTypes = {
   courier: PropTypes.object.isRequired,
   selectCourier: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  chosen: PropTypes.bool
+  chosen: PropTypes.bool,
+  isBest: PropTypes.bool
 }
 
 const Container = styled.div`
@@ -34,6 +35,7 @@ const Container = styled.div`
   border: 1px solid lightGrey;
   margin-bottom: 12px;
   border-radius: 4px;
+  background-color: ${props => props.isBest ? 'gold' : 'transparent'};
 `
 
 const Name = styled.h3`

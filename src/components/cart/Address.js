@@ -16,7 +16,7 @@ class Address extends Component {
       <Container isActive={isActive}>
         <Top>
           <h4>1 - CHOOSE A DELIVERY ADDRESS</h4>
-          <AddNew>Add New Address</AddNew>
+          {addressSelected && <i className='fas fa-check-circle' style={{color: 'green'}} />}
         </Top>
         {isActive &&
         <AddressCard>
