@@ -16,7 +16,7 @@ class Address extends Component {
       <Container isActive={isActive}>
         <Top>
           <h4>1 - CHOOSE A DELIVERY ADDRESS</h4>
-          {addressSelected && <i className='fas fa-check-circle' style={{color: 'green'}} />}
+          {addressSelected && <i className='fas fa-check-circle' style={{color: constants.colors.vegan, marginTop: constants.size.margin.small}}/>}
         </Top>
         {isActive &&
           <div>
@@ -68,6 +68,7 @@ const Container = styled.div`
 const Top = styled.div`
   height: 10%;
   display: flex;
+  flex-flow: row;
   justify-content: space-between;
   align-items: baseline;
 `
@@ -75,7 +76,7 @@ const Top = styled.div`
 const AddNew = styled.div`
   margin-top: ${constants.size.margin.small};
   font-weight: 500;
-  font-size: 0.8em;
+  font-size: 0.9em;
   text-decoration: underline;
   cursor: pointer;
   color: ${constants.colors.omnivore};

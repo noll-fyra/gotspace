@@ -50,8 +50,7 @@ class Summary extends Component {
         </Products>
 
         {chosenAddress > 0 &&
-        <div style={{width: '100%', marginTop: constants.size.margin.medium}}>
-          <div style={{marginBottom: constants.size.margin.tiny}}>Selected address:</div>
+        <div style={{width: '100%'}}>
           {chosenAddress === 1 ?
             <AddressCard>
               <MainAddress>

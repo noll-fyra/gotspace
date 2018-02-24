@@ -13,7 +13,7 @@ class TopNav extends Component {
         <Third style={{justifyContent: 'flex-start'}}>
           <Logo to='/'>Got Space?</Logo>
         </Third>
-        <Third>Buy extra stuff for no added shipping</Third>
+        <Third>Buy extra stuff for no added shipping!</Third>
         <Third style={{justifyContent: 'flex-end'}}>
           {/* <CartIcon cart={this.props.cart} /> */}
           {/* <User className='far fa-user-circle' /> */}
@@ -47,6 +47,7 @@ const Third = styled.div`
   align-items: center;
   padding: 12px;
   color: white;
+  font-family: 'Muli';
 `
 
 const Logo = styled(Link)`

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CourierCard from '../courier/CourierCard'
+import constants from '../../constants/constants'
 import styled from 'styled-components'
 
 class Rates extends Component {
@@ -16,7 +17,7 @@ class Rates extends Component {
       <Container isActive={isActive}>
         <Top>
           <h4>2 - CHOOSE A SHIPPING OPTION</h4>
-          {addressSelected && !isActive && <i className='fas fa-check-circle' style={{color: 'green'}} />}
+          {addressSelected && !isActive && <i className='fas fa-check-circle' style={{color: constants.colors.vegan}} />}
         </Top>
         {isActive &&
           <div>
