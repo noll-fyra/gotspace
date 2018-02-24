@@ -8,8 +8,13 @@ class Catalogue extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      category: 'all'
+      category: 'all',
+      show: false
     }
+  }
+
+  componentDidMount () {
+    window.setTimeout(() => { this.setState({ show: true }) }, 3000)
   }
 
   render () {
@@ -23,6 +28,11 @@ class Catalogue extends Component {
             </Category>
           })}
         </ProductNav>
+
+        {this.state.show &&
+          <Fomo>67 people are looking at these items right now</Fomo>
+        }
+
         <Container>
           {filtered.length > 0
             ? <Cards>
@@ -68,8 +78,15 @@ const ProductNav = styled.div`
   z-index: 20;
 `
 
+const Fomo = styled.div`
+  text-align: center;
+  padding: 12px;
+  background-color: lightGreen;
+  color: white;
+`
+
 const Category = styled.div`
-  width: 20%;
+  width: 25%;
   height: ${constants.size.height.small};
   font-size: 0.8em;
   font-weight: 600;

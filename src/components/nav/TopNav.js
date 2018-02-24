@@ -13,7 +13,7 @@ class TopNav extends Component {
         <Third style={{justifyContent: 'flex-start'}}>
           <Logo to='/'>Got Space?</Logo>
         </Third>
-        <Third>Buy extra stuff for no added shipping fees</Third>
+        <Third>Buy extra stuff for no added shipping</Third>
         <Third style={{justifyContent: 'flex-end'}}>
           {/* <CartIcon cart={this.props.cart} /> */}
           {/* <User className='far fa-user-circle' /> */}

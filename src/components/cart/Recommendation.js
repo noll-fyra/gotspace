@@ -10,12 +10,12 @@ class Recommendation extends Component {
   }
 
   render () {
-    let { productsList, cart, handleUpdateCart, loading, recommendations } = this.props
+    let { productsList, cart, handleUpdateCart, loading, recommendations, isActive } = this.props
 
     return (
-      <Container>
+      <Container isActive={isActive}>
         <Top>
-          <h4>RECOMMENDATIONS</h4>
+          <h4>3 - (OPTIONAL) RECOMMENDATIONS FOR YOU</h4>
           <div>{recommendations.length} Items</div>
         </Top>
         <RecDiv>
@@ -38,13 +38,14 @@ Recommendation.propTypes = {
   cart: PropTypes.object.isRequired,
   handleUpdateCart: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  recommendations: PropTypes.arrayOf(PropTypes.object).isRequired
+  recommendations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isActive: PropTypes.bool.isRequired
 }
 
 const Container = styled.div`
   width: 100%;
   height: 69%;
-  border: 1px solid lightGrey;
+  border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;
 `

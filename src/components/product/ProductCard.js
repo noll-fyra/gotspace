@@ -58,7 +58,10 @@ class ProductCard extends Component {
         <Info>
           <div>
             <Title>{this.shorten(product.title, 'title')}</Title>
-            <Price>${parseFloat(product.price)}</Price>
+            <PriceDiv>
+              <Price style={{color: 'red'}}>${parseFloat(product.price)}</Price>
+              <Price style={{textDecoration: 'line-through'}}>${(parseFloat(product.price) * 1.25).toFixed(2)}</Price>
+            </PriceDiv>
             <Description>{this.shorten(product.description, 'description')}</Description>
           </div>
           <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'baseline'}}>
@@ -123,9 +126,17 @@ const Title = styled.div`
   font-family: 'Oswald';
 `
 
-const Price = styled.div`
-  font-size: 0.9em;
+const PriceDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin: 12px 0;
+`
+
+const Price = styled.span`
+  font-size: 1.1em;
+  font-weight: bold;
   font-family: 'Muli';
+  margin-left: 8px;
 `
 
 const Description = styled.div`

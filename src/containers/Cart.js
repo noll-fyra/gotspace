@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import Rates from '../components/cart/Rates'
 import Recommendation from '../components/cart/Recommendation'
 import Summary from '../components/cart/Summary'
 import Address from '../components/cart/Address'
@@ -17,12 +18,22 @@ class Cart extends Component {
       declaredCurrency: 'SGD',
       recommendations: [],
       loading: false,
-      addressSelected: false
+      addressSelected: false,
+      rates: [],
+      ratesLoading: true,
+      courier: -1,
+      active: 1
     }
     this.convertForAPI = this.convertForAPI.bind(this)
     this.fetchRecommendations = this.fetchRecommendations.bind(this)
     this.fetchShipping = this.fetchShipping.bind(this)
     this.selectAddress = this.selectAddress.bind(this)
+    this.selectCourier = this.selectCourier.bind(this)
+    this.setActive = this.setActive.bind(this)
+  }
+
+  componentDidMount () {
+    this.fetchRecommendations()
   }
 
   convertForAPI (arr, forEasyShip = false) {
@@ -30,14 +41,16 @@ class Cart extends Component {
       let temp = {}
       temp.product_id = item.product_id
       temp.title = item.title
-      temp.description = item.description
+      // temp.description = item.description
       temp.actual_weight = parseFloat(item.actual_weight)
       temp.height = item.height
       temp.width = item.width
       temp.length = item.length
-      temp.category = forEasyShip ? 'mobiles' : item.category
-      temp.declared_currency = this.state.declaredCurrency
-      temp.declared_customs_value = parseFloat(item.price)
+      if (forEasyShip) {
+        temp.category = 'mobiles'
+        temp.declared_currency = this.state.declaredCurrency
+        temp.declared_customs_value = parseFloat(item.price)
+      }
       return temp
     })
   }
@@ -66,7 +79,7 @@ class Cart extends Component {
     .then(res => { console.log(res.data); this.setState({ recommendations: res.data, loading: false }) })
     .catch(err => {
       console.error(err)
-      delete data.catalog
+      // delete data.catalog
       console.log(JSON.stringify(data))
       this.setState({ loading: false })
     })
@@ -96,15 +109,37 @@ class Cart extends Component {
     data.taxes_duties_paid_by = 'Sender'
     data.is_insured = false
     data.items = this.convertForAPI(cartItems, true)
+
+    this.setState({ ratesLoading: true })
     axios.post(easyShipAPI, JSON.stringify(data), headers)
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
+    .then(res => {
+      console.log(res)
+      this.setState({
+        rates: res.data.rates,
+        ratesLoading: false
+      })
+    })
+    .catch(err => {
+      console.error(err)
+      this.setState({ ratesLoading: false })
+    })
   }
 
   selectAddress () {
-    this.setState({ addressSelected: true })
+    this.setState({
+      addressSelected: true,
+      active: 2
+    })
     this.fetchRecommendations()
     this.fetchShipping()
+  }
+
+  selectCourier (index) {
+    this.setState({ courier: index })
+  }
+
+  setActive (index) {
+    this.setState({ active: index })
   }
 
   render () {
@@ -113,12 +148,19 @@ class Cart extends Component {
     return (
       <Container>
         <LeftContainer>
-          <Address addressSelected={this.state.addressSelected} selectAddress={this.selectAddress} />
-          <Recommendation productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} loading={this.state.loading} recommendations={this.state.recommendations} />
+          <Address addressSelected={this.state.addressSelected} selectAddress={this.selectAddress} isActive={this.state.active === 1} />
+
+          {this.state.courier < 0 &&
+            <Rates rates={this.state.rates} ratesLoading={this.state.ratesLoading} selectCourier={this.selectCourier} addressSelected={this.state.addressSelected} isActive={this.state.active === 2} />
+          }
+
+          {this.state.addressSelected && !this.state.ratesLoading && this.state.courier > -1 &&
+          <Recommendation productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} loading={this.state.loading} recommendations={this.state.recommendations} isActive={this.state.active === 3} />
+          }
         </LeftContainer>
 
         <SummaryContainer>
-          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} />
+          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} courier={this.state.rates.length > 0 && this.state.courier > -1 ? this.state.rates[this.state.courier] : null} isActive={this.state.active === 4} />
         </SummaryContainer>
       </Container>
     )

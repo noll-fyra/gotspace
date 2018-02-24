@@ -71,10 +71,12 @@ const constants = {
   },
   lists: {
     categories: [
+      'Men\'s Fashion',
       'Textbooks',
-      'Home & Furniture',
-      'Kitchen & Appliances',
-      'Car Accessories',
+      // 'Home & Furniture',
+      // 'Kitchen & Appliances',
+      // 'Car Accessories',
+      'Mobiles & Tablets',
       'Electronics'
     ],
     priceRange: [

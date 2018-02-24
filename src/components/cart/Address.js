@@ -10,10 +10,12 @@ class Address extends Component {
   }
 
   render () {
+    let { selectAddress, addressSelected, isActive } = this.props
+
     return (
-      <Container>
+      <Container isActive={isActive}>
         <Top>
-          <h4>SHIPPING ADDRESS</h4>
+          <h4>1 - CHOOSE A DELIVERY ADDRESS</h4>
           <AddNew>Add New Address</AddNew>
         </Top>
         <AddressCard>
@@ -25,7 +27,7 @@ class Address extends Component {
           Singapore 178882<br />
           </MainAddress>
           <SelectDiv>
-            <Select onClick={this.props.selectAddress} selected={this.props.addressSelected}>{this.props.addressSelected ? 'Selected' : 'Select'}</Select>
+            <Select onClick={selectAddress} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
           </SelectDiv>
         </AddressCard>
       </Container>
@@ -35,13 +37,14 @@ class Address extends Component {
 
 Address.propTypes = {
   addressSelected: PropTypes.bool.isRequired,
-  selectAddress: PropTypes.func.isRequired
+  selectAddress: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired
 }
 
 const Container = styled.div`
   width: 100%;
   height: 29%;
-  border: 1px solid lightGrey;
+  border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;
   margin-bottom: ${constants.size.margin.medium};
@@ -59,8 +62,7 @@ const AddNew = styled.div`
   font-size: 0.8em;
   font-weight: bold;
   cursor: pointer;
-  color: blue;
-  border: 1px solid blue;
+  color: grey;
   padding: 4px;
   border-radius: 4px;
 `
@@ -69,7 +71,7 @@ const AddressCard = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid grey;
   border-radius: ${constants.size.borderRadius.small};
 `
 const MainAddress = styled.div`
@@ -86,11 +88,14 @@ const SelectDiv = styled.div`
 `
 
 const Select = styled.div`
-  background-color: ${props => props.selected ? 'grey' : 'blue'};
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
+  background-color: ${props => props.selected ? 'white' : 'red'};
+  font-size: 0.8em;
+  font-weight: bold;
   cursor: pointer;
+  color: ${props => props.selected ? 'grey' : 'white'};
+  border: 1px solid ${props => props.selected ? 'grey' : 'red'};;
+  padding: 4px 24px;
+  border-radius: 4px;
 `
 
 const Saved = styled.div`

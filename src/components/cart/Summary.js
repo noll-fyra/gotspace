@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ProductSummaryCard from '../product/ProductSummaryCard'
+import CourierCard from '../courier/CourierCard'
 import styled from 'styled-components'
 
 class Summary extends Component {
@@ -33,11 +34,11 @@ class Summary extends Component {
   }
 
   render () {
-    let { cart, handleUpdateCart } = this.props
+    let { cart, handleUpdateCart, courier, isActive } = this.props
 
     let count = Object.values(cart).length > 0 ? Object.values(cart).reduce((a, b) => a + b) : 0
     return (
-      <Container>
+      <Container isActive={isActive}>
         <Top>
           <h4>SUMMARY</h4>
           <h5>{count}{count === 1 ? ' Item' : ' Items'}</h5>
@@ -52,46 +53,58 @@ class Summary extends Component {
             <tbody>
               <tr>
                 <td>Subtotal</td>
-                <td style={{textAlign: 'right', paddingBottom: '8px'}}>
+                <td style={{textAlign: 'right', padding: '8px 0'}}>
                   <Dollar>$</Dollar>
                   <Amount>{this.totalPayment().toFixed(2)}</Amount>
                 </td>
               </tr>
               <tr>
                 <td>Shipping</td>
-                <td style={{textAlign: 'right', paddingBottom: '8px'}}>
-                  <Dollar>$</Dollar>
-                  <Amount>12.00</Amount>
+                <td style={{textAlign: 'right', padding: '8px 0'}}>
+                  <Dollar>{courier ? '$' : ''}</Dollar>
+                  <Amount>{courier ? courier.total_charge : 'Choose a shipping option'}</Amount>
                 </td>
               </tr>
+              {courier &&
+              <tr>
+                <td colSpan={2}>
+                  <CourierCard courier={courier} chosen />
+                </td>
+              </tr>
+              }
               <tr>
                 <td>Total</td>
-                <td style={{textAlign: 'right', paddingBottom: '8px'}}>
+                {courier
+                ? <td style={{textAlign: 'right', padding: '8px 0'}}>
                   <Dollar>$</Dollar>
-                  <Amount>{(this.totalPayment() + 12).toFixed(2)}</Amount>
+                  <Amount>{(this.totalPayment() + courier.total_charge).toFixed(2)}</Amount>
                 </td>
+                : <td />
+              }
               </tr>
             </tbody>
           </table>
-          <Checkout to='/checkout'>Checkout</Checkout>
+          <Link to='/checkout' style={{textDecoration: 'none'}}>
+            <Checkout active={courier}>Checkout</Checkout>
+          </Link>
         </Payment>
-
       </Container>
     )
   }
 }
 
 Summary.propTypes = {
-  // products: PropTypes.arrayOf(PropTypes.object).isRequired,
   productsList: PropTypes.object.isRequired,
   cart: PropTypes.object.isRequired,
-  handleUpdateCart: PropTypes.func.isRequired
+  handleUpdateCart: PropTypes.func.isRequired,
+  courier: PropTypes.object,
+  isActive: PropTypes.bool.isRequired
 }
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  border: 1px solid lightGrey;
+  border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;
 `
@@ -127,14 +140,14 @@ const Amount = styled.span`
   font-weight: lighter;
 `
 
-const Checkout = styled(Link)`
+const Checkout = styled.div`
   width: 100%;
   padding: 8px;
-  background-color: red;
+  background-color: ${props => props.active ? 'red' : 'lightGrey'};
   font-weight: bold;
   font-size: 1.3em;
   text-align: center;
-  color: black;
+  color: white;
   text-decoration: none;
   border-radius: 4px;
 `
