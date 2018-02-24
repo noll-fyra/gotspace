@@ -19,18 +19,32 @@ class Address extends Component {
           {addressSelected && <i className='fas fa-check-circle' style={{color: 'green'}} />}
         </Top>
         {isActive &&
-        <AddressCard>
-          <MainAddress>
-            <Saved>SAVED</Saved>
-            <b>Smile Person</b><br />
+          <div>
+            <AddressCard>
+              <MainAddress>
+                <b>Smile Person</b><br />
           2 Stamford Road<br />
           Level 70 Equinox Complex, Downtown Core<br />
           Singapore 178882<br />
-          </MainAddress>
-          <SelectDiv>
-            <Select onClick={selectAddress} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
-          </SelectDiv>
-        </AddressCard>
+              </MainAddress>
+              <SelectDiv>
+                <Select onClick={() => selectAddress(1)} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
+              </SelectDiv>
+            </AddressCard>
+
+            <AddressCard>
+              <MainAddress>
+                <b>Mumen Dickie</b><br />
+          3 Orchard Road<br />
+          #10-01 Mandarin Gallery, Somerset<br />
+          Singapore 375894<br />
+              </MainAddress>
+              <SelectDiv>
+                <Select onClick={() => selectAddress(2)} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
+              </SelectDiv>
+            </AddressCard>
+            <AddNew><i className='fas fa-plus-circle' style={{marginRight: constants.size.margin.tiny}} />Add New Address</AddNew>
+          </div>
         }
       </Container>
     )
@@ -56,14 +70,15 @@ const Top = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: ${constants.size.margin.medium};
 `
 
 const AddNew = styled.div`
+  margin-top: ${constants.size.margin.small};
+  font-weight: 500;
   font-size: 0.8em;
-  font-weight: bold;
+  text-decoration: underline;
   cursor: pointer;
-  color: grey;
+  color: ${constants.colors.omnivore};
   padding: 4px;
   border-radius: 4px;
 `
@@ -74,18 +89,19 @@ const AddressCard = styled.div`
   align-items: center;
   border: 1px solid grey;
   border-radius: ${constants.size.borderRadius.small};
+  margin-bottom: ${constants.size.margin.medium};
 `
 const MainAddress = styled.div`
-  width: 70%;
+  width: 85%;
   font-family: 'Muli';
   padding: ${constants.size.padding.medium};
 `
 
 const SelectDiv = styled.div`
-  width: 30%;
+  width: 15%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 `
 
 const Select = styled.div`
@@ -94,7 +110,7 @@ const Select = styled.div`
   font-weight: bold;
   cursor: pointer;
   color: ${props => props.selected ? 'grey' : 'white'};
-  border: 1px solid ${props => props.selected ? 'grey' : 'red'};;
+  border: 1px solid ${props => props.selected ? 'grey' : 'red'};
   padding: 4px 24px;
   border-radius: 4px;
 `

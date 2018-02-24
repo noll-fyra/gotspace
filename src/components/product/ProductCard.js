@@ -109,7 +109,7 @@ const Image = styled.img`
 `
 
 const Info = styled.div`
-  height: 150px;
+  height: 160px;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
@@ -192,10 +192,11 @@ const ButtonLink = styled(Link)`
   padding: ${constants.size.padding.small};
   cursor: pointer;
   border-radius: ${constants.size.borderRadius.small};
-  background-color: ${constants.colors.action};
+  background-color: ${constants.colors.brand};
   color: ${constants.colors.white};
   font-family: 'Muli';
   font-size: 0.9em;
+  font-weight: 500;
   flex-wrap: wrap;
   text-decoration: none;
 

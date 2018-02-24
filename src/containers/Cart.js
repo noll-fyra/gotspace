@@ -22,7 +22,8 @@ class Cart extends Component {
       rates: [],
       ratesLoading: true,
       courier: -1,
-      active: 1
+      active: 1,
+      chosenAddress: 0
     }
     this.convertForAPI = this.convertForAPI.bind(this)
     this.fetchRecommendations = this.fetchRecommendations.bind(this)
@@ -126,9 +127,10 @@ class Cart extends Component {
     })
   }
 
-  selectAddress () {
+  selectAddress (num) {
     this.setState({
       addressSelected: true,
+      chosenAddress: num,
       active: 2
     })
     this.fetchRecommendations()
@@ -158,7 +160,7 @@ class Cart extends Component {
         </LeftContainer>
 
         <SummaryContainer>
-          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} courier={this.state.rates.length > 0 && this.state.courier > -1 ? this.state.rates[this.state.courier] : null} isActive={this.state.active === 4} />
+          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} courier={this.state.rates.length > 0 && this.state.courier > -1 ? this.state.rates[this.state.courier] : null} isActive={this.state.active === 4} chosenAddress={this.state.chosenAddress} />
         </SummaryContainer>
       </Container>
     )
