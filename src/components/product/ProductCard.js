@@ -192,7 +192,7 @@ const ButtonLink = styled(Link)`
   padding: ${constants.size.padding.small};
   cursor: pointer;
   border-radius: ${constants.size.borderRadius.small};
-  background-color: ${constants.colors.action};
+  background-color: #FF83B9FF;
   color: ${constants.colors.white};
   font-family: 'Muli';
   font-size: 0.9em;

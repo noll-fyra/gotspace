@@ -24,7 +24,7 @@ class Catalogue extends Component {
         <ProductNav>
           {constants.lists.categories.map(category => {
             return <Category key={category} onClick={() => this.setState({category: category})} active={this.state.category === category}>
-              {category}
+              {category.toUpperCase()}
             </Category>
           })}
         </ProductNav>
@@ -97,7 +97,7 @@ const Category = styled.div`
   cursor: pointer;
   border-bottom: 2px solid ${props => props.active ? constants.colors.darkGrey : 'transparent'};
   &:hover {
-    background-color: blue;
+    background-color: #79A9FFFF;
     color: white;
   }
 `

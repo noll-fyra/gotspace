@@ -16,7 +16,6 @@ class Address extends Component {
       <Container isActive={isActive}>
         <Top>
           <h4>1 - CHOOSE A DELIVERY ADDRESS</h4>
-          <AddNew>Add New Address</AddNew>
         </Top>
         <AddressCard>
           <MainAddress>
@@ -30,6 +29,7 @@ class Address extends Component {
             <Select onClick={selectAddress} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
           </SelectDiv>
         </AddressCard>
+        <AddNew><i className='fas fa-plus-circle' style={{marginRight: constants.size.margin.tiny}}/>Add New Address</AddNew>
       </Container>
     )
   }
@@ -43,7 +43,7 @@ Address.propTypes = {
 
 const Container = styled.div`
   width: 100%;
-  height: 29%;
+  height: ${props => props.isActive ? '70%' : '30%'};
   border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;
@@ -59,10 +59,12 @@ const Top = styled.div`
 `
 
 const AddNew = styled.div`
+  margin-top: ${constants.size.margin.small};
+  font-weight: 500;
   font-size: 0.8em;
-  font-weight: bold;
+  text-decoration: underline;
   cursor: pointer;
-  color: grey;
+  color: ${constants.colors.omnivore};
   padding: 4px;
   border-radius: 4px;
 `
@@ -75,16 +77,16 @@ const AddressCard = styled.div`
   border-radius: ${constants.size.borderRadius.small};
 `
 const MainAddress = styled.div`
-  width: 70%;
+  width: 85%;
   font-family: 'Muli';
   padding: ${constants.size.padding.medium};
 `
 
 const SelectDiv = styled.div`
-  width: 30%;
+  width: 15%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 `
 
 const Select = styled.div`
@@ -93,7 +95,7 @@ const Select = styled.div`
   font-weight: bold;
   cursor: pointer;
   color: ${props => props.selected ? 'grey' : 'white'};
-  border: 1px solid ${props => props.selected ? 'grey' : 'red'};;
+  border: 1px solid ${props => props.selected ? 'grey' : 'red'};
   padding: 4px 24px;
   border-radius: 4px;
 `
