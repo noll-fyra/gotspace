@@ -92,7 +92,7 @@ class Summary extends Component {
               {courier &&
               <tr>
                 <td colSpan={2}>
-                  <CourierCard courier={courier} chosen isBest={courier.total_charge === Math.min(...rates.map(courier => courier.total_charge))} isBest={isBest} />
+                  <CourierCard courier={courier} chosen isBest={isBest} />
                 </td>
               </tr>
               }
