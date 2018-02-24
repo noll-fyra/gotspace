@@ -160,7 +160,7 @@ class Cart extends Component {
         </LeftContainer>
 
         <SummaryContainer>
-          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} courier={this.state.rates.length > 0 && this.state.courier > -1 ? this.state.rates[this.state.courier] : null} isActive={this.state.active === 4} chosenAddress={this.state.chosenAddress} />
+          <Summary products={products} productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} courier={this.state.rates.length > 0 && this.state.courier > -1 ? this.state.rates[this.state.courier] : null} isActive={this.state.active === 4} chosenAddress={this.state.chosenAddress} isBest={this.state.rates.length > 0 && this.state.courier > -1 ? this.state.rates[this.state.courier].total_charge === Math.min(...this.state.rates.map(courier => courier.total_charge)) : false} />
         </SummaryContainer>
       </Container>
     )

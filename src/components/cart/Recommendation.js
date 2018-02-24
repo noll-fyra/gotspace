@@ -15,7 +15,7 @@ class Recommendation extends Component {
     return (
       <Container isActive={isActive}>
         <Top>
-          <h4>3 - (OPTIONAL) RECOMMENDATIONS FOR YOU</h4>
+          <h4>3 - (OPTIONAL) RECOMMENDATIONS FOR YOU (FREE SHIPPING OF 1 ITEM WITH "GOLDEN" OPTION)</h4>
           <div>{recommendations.length} Items</div>
         </Top>
         {isActive &&
