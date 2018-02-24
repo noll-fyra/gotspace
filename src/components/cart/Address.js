@@ -21,16 +21,27 @@ class Address extends Component {
           <div>
         <AddressCard>
           <MainAddress>
-            <Saved>SAVED</Saved>
             <b>Smile Person</b><br />
           2 Stamford Road<br />
           Level 70 Equinox Complex, Downtown Core<br />
           Singapore 178882<br />
           </MainAddress>
           <SelectDiv>
-            <Select onClick={selectAddress} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
+            <Select onClick={() => selectAddress(1)} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
           </SelectDiv>
         </AddressCard>
+
+        <AddressCard>
+          <MainAddress>
+            <b>Mumen Dickie</b><br />
+          3 Orchard Road<br />
+          #10-01 Mandarin Gallery, Somerset<br />
+          Singapore 375894<br />
+          </MainAddress>
+          <SelectDiv>
+            <Select onClick={() => selectAddress(2)} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
+           </SelectDiv>
+         </AddressCard>
         <AddNew><i className='fas fa-plus-circle' style={{marginRight: constants.size.margin.tiny}}/>Add New Address</AddNew>
         </div>
         }
@@ -58,7 +69,6 @@ const Top = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: ${constants.size.margin.medium};
 `
 
 const AddNew = styled.div`
@@ -78,6 +88,7 @@ const AddressCard = styled.div`
   align-items: center;
   border: 1px solid grey;
   border-radius: ${constants.size.borderRadius.small};
+  margin-bottom: ${constants.size.margin.medium};
 `
 const MainAddress = styled.div`
   width: 85%;

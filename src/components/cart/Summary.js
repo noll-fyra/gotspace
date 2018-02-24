@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ProductSummaryCard from '../product/ProductSummaryCard'
 import CourierCard from '../courier/CourierCard'
+import constants from '../../constants/constants'
 import styled from 'styled-components'
 
 class Summary extends Component {
@@ -34,7 +35,7 @@ class Summary extends Component {
   }
 
   render () {
-    let { cart, handleUpdateCart, courier, isActive } = this.props
+    let { cart, handleUpdateCart, courier, isActive, chosenAddress } = this.props
 
     let count = Object.values(cart).length > 0 ? Object.values(cart).reduce((a, b) => a + b) : 0
     return (
@@ -47,6 +48,30 @@ class Summary extends Component {
         <Products>
           {this.renderCart().map((item, index) => <ProductSummaryCard key={item.product_id} product={item} count={cart[item.product_id]} handleUpdateCart={handleUpdateCart} />)}
         </Products>
+
+        {chosenAddress > 0 &&
+        <div style={{width: '100%', marginTop: constants.size.margin.medium}}>
+          <div style={{marginBottom: constants.size.margin.tiny}}>Selected address:</div>
+          {chosenAddress === 1 ?
+            <AddressCard>
+              <MainAddress>
+                <b>Smile Person</b><br />
+              2 Stamford Road<br />
+              Level 70 Equinox Complex, Downtown Core<br />
+              Singapore 178882<br />
+              </MainAddress>
+            </AddressCard> :
+            <AddressCard>
+              <MainAddress>
+                <b>Mumen Dickie</b><br />
+              3 Orchard Road<br />
+              #10-01 Mandarin Gallery, Somerset<br />
+              Singapore 375894<br />
+              </MainAddress>
+             </AddressCard>
+          }
+        </div>
+        }
 
         <Payment>
           <table style={{width: '100%'}}>
@@ -127,7 +152,6 @@ const Payment = styled.div`
   flex-flow: column;
   justify-content: space-between;
   align-items: center;
-  padding-top: 12px;
 `
 
 const Dollar = styled.span`
@@ -150,6 +174,27 @@ const Checkout = styled.div`
   color: white;
   text-decoration: none;
   border-radius: 4px;
+`
+
+const AddressCard = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: ${constants.size.borderRadius.small};
+  margin-bottom: ${constants.size.margin.medium};
+`
+const MainAddress = styled.div`
+  width: 85%;
+  font-family: 'Muli';
+  padding: ${constants.size.padding.medium};
+`
+
+const SelectDiv = styled.div`
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 `
 
 export default Summary
