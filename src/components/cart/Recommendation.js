@@ -24,7 +24,7 @@ class Recommendation extends Component {
             ? <div>Fetching recommendations...</div>
             : recommendations.slice(0, 8).map(product =>
               <CardDiv key={product.product_id}>
-                <ProductCard product={productsList[product.product_id]} count={cart[product.product_id] || 0} handleUpdateCart={handleUpdateCart} smaller />
+                <ProductCard product={productsList[product.product_id]} count={cart[product.product_id] || 0} handleUpdateCart={handleUpdateCart} />
               </CardDiv>
     )
     }
@@ -50,6 +50,7 @@ const Container = styled.div`
   border: ${props => props.isActive ? '2px solid red' : '1px solid lightGrey'};
   padding: 12px;
   border-radius: 8px;
+  overflow: hidden;
 `
 
 const Top = styled.div`
@@ -61,15 +62,18 @@ const Top = styled.div`
 
 const RecDiv = styled.div`
   width: 100%;
+  height: 80%;
+  max-height: 80%;
   display: flex;
-  overflow-y: hidden;
-  overflow-x: scroll;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  overflow: auto;
 `
 
 const CardDiv = styled.div`
-  width: 40%;
-  min-width: 40%;
-  margin-right: 8px;
+  width: 45%;
+  margin-bottom: 12px;
 `
 
 export default Recommendation

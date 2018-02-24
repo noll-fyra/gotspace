@@ -20,31 +20,31 @@ class Address extends Component {
         </Top>
         {isActive &&
           <div>
-        <AddressCard>
-          <MainAddress>
-            <b>Smile Person</b><br />
+            <AddressCard>
+              <MainAddress>
+                <b>Smile Person</b><br />
           2 Stamford Road<br />
           Level 70 Equinox Complex, Downtown Core<br />
           Singapore 178882<br />
-          </MainAddress>
-          <SelectDiv>
-            <Select onClick={() => selectAddress(1)} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
-          </SelectDiv>
-        </AddressCard>
+              </MainAddress>
+              <SelectDiv>
+                <Select onClick={() => selectAddress(1)} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
+              </SelectDiv>
+            </AddressCard>
 
-        <AddressCard>
-          <MainAddress>
-            <b>Mumen Dickie</b><br />
+            <AddressCard>
+              <MainAddress>
+                <b>Mumen Dickie</b><br />
           3 Orchard Road<br />
           #10-01 Mandarin Gallery, Somerset<br />
           Singapore 375894<br />
-          </MainAddress>
-          <SelectDiv>
-            <Select onClick={() => selectAddress(2)} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
-           </SelectDiv>
-         </AddressCard>
-        <AddNew><i className='fas fa-plus-circle' style={{marginRight: constants.size.margin.tiny}}/>Add New Address</AddNew>
-        </div>
+              </MainAddress>
+              <SelectDiv>
+                <Select onClick={() => selectAddress(2)} selected={addressSelected}>{addressSelected ? 'Selected' : 'Select'}</Select>
+              </SelectDiv>
+            </AddressCard>
+            <AddNew><i className='fas fa-plus-circle' style={{marginRight: constants.size.margin.tiny}} />Add New Address</AddNew>
+          </div>
         }
       </Container>
     )
