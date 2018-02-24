@@ -23,7 +23,7 @@ class Checkout extends Component {
   }
 }
 
-Checkout.PropTypes = {
+Checkout.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   cart: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleUpdateCart: PropTypes.func.isRequired

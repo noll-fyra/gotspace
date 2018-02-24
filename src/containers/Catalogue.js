@@ -13,7 +13,7 @@ class Catalogue extends Component {
   }
 
   render () {
-    const filtered = this.state.category === 'all' ? this.props.products : this.props.products.filter(product => { return product.category_name === this.state.category })
+    const filtered = this.state.category === 'all' ? this.props.products : this.props.products.filter(product => { return product.category === this.state.category })
     return (
       <Main>
         <ProductNav>
@@ -60,7 +60,7 @@ const ProductNav = styled.div`
   flex-flow: row;
   justify-content: center;
   align-items: center;
-  padding: ${constants.size.padding.small} ${constants.size.padding.media};
+  padding: ${constants.size.padding.small} 0;
   background-color: #B9F0FFFF;
   top: 48px;
   position: -webkit-sticky;
@@ -69,7 +69,7 @@ const ProductNav = styled.div`
 `
 
 const Category = styled.div`
-  width: 25%;
+  width: 20%;
   height: ${constants.size.height.small};
   font-size: 0.8em;
   font-weight: 600;
@@ -79,6 +79,10 @@ const Category = styled.div`
   align-items: center;
   cursor: pointer;
   border-bottom: 2px solid ${props => props.active ? constants.colors.darkGrey : 'transparent'};
+  &:hover {
+    background-color: blue;
+    color: white;
+  }
 `
 
 const Container = styled.div`

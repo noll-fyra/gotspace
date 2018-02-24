@@ -5,11 +5,11 @@ let updatedProducts = products.map(item => {
   temp.product_id = item.product_id
   temp.title = item.title
   temp.description = item.description
-  temp.category = item.category_name
+  temp.category = item.category
   temp.declared_customs_value = item.price
   temp.actual_weight = item.weight
   temp.width = item.width
-  temp.length = item.breadth
+  temp.length = item.length
   temp.height = item.height
   temp.declared_currency = 'SGD'
   return temp

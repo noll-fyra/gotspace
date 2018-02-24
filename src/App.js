@@ -22,7 +22,7 @@ class App extends Component {
 
   componentWillMount () {
     this.convertProductsToObject()
-    this.loadRandomCart(1)
+    // this.loadRandomCart(1)
   }
 
   convertProductsToObject () {

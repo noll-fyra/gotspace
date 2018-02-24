@@ -10,7 +10,7 @@ class Recommendation extends Component {
   }
 
   render () {
-    let { productsList, cart, handleUpdateCart, recommendations } = this.props
+    let { productsList, cart, handleUpdateCart, loading, recommendations } = this.props
 
     return (
       <Container>
@@ -19,10 +19,12 @@ class Recommendation extends Component {
           <div>{recommendations.length} Items</div>
         </Top>
         <RecDiv>
-          {recommendations.slice(0, 8).map(product =>
-            <CardDiv key={product.product_id}>
-              <ProductCard product={productsList[product.product_id]} count={cart[product.product_id] || 0} handleUpdateCart={handleUpdateCart} smaller />
-            </CardDiv>
+          {loading
+            ? <div>Fetching recommendations...</div>
+            : recommendations.slice(0, 8).map(product =>
+              <CardDiv key={product.product_id}>
+                <ProductCard product={productsList[product.product_id]} count={cart[product.product_id] || 0} handleUpdateCart={handleUpdateCart} smaller />
+              </CardDiv>
     )
     }
         </RecDiv>

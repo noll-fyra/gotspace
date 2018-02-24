@@ -13,37 +13,36 @@ class Cart extends Component {
       originCountry: 'SG',
       destinationCountry: 'SG',
       originPostalCode: '389779',
-      destinationPostalCode: '277993',
+      destinationPostalCode: '178882',
       declaredCurrency: 'SGD',
       recommendations: [],
-      loading: false
+      loading: false,
+      addressSelected: false
     }
+    this.convertForAPI = this.convertForAPI.bind(this)
     this.fetchRecommendations = this.fetchRecommendations.bind(this)
+    this.fetchShipping = this.fetchShipping.bind(this)
+    this.selectAddress = this.selectAddress.bind(this)
   }
 
-  componentWillMount () {
-    this.fetchRecommendations()
+  convertForAPI (arr, forEasyShip = false) {
+    return arr.map(item => {
+      let temp = {}
+      temp.product_id = item.product_id
+      temp.title = item.title
+      temp.description = item.description
+      temp.actual_weight = parseFloat(item.actual_weight)
+      temp.height = item.height
+      temp.width = item.width
+      temp.length = item.length
+      temp.category = forEasyShip ? 'mobiles' : item.category
+      temp.declared_currency = this.state.declaredCurrency
+      temp.declared_customs_value = parseFloat(item.price)
+      return temp
+    })
   }
 
   fetchRecommendations () {
-    let _this = this
-    function convertForAPI (arr) {
-      return arr.map(item => {
-        let temp = {}
-        temp.product_id = item.product_id
-        temp.title = item.title
-        temp.description = item.description
-        temp.actual_weight = parseFloat(item.weight)
-        temp.height = item.height
-        temp.width = item.width
-        temp.length = item.breadth
-        temp.category = item.category_name
-        temp.declared_currency = _this.state.declaredCurrency
-        temp.declared_customs_value = parseFloat(item.price)
-        return temp
-      })
-    }
-
     let cartItems = []
     for (var i in this.props.cart) {
       for (var j = 0; j < this.props.cart[i]; j++) {
@@ -58,17 +57,54 @@ class Cart extends Component {
     order.destination_country = this.state.destinationCountry
     order.origin_postal_code = this.state.originPostalCode
     order.destination_postal_code = this.state.destinationPostalCode
-    order.items = convertForAPI(cartItems)
+    order.items = this.convertForAPI(cartItems)
     data.order = order
-    data.catalog = convertForAPI(this.props.products)
+    data.catalog = this.convertForAPI(this.props.products)
 
     this.setState({ loading: true })
     axios.post(api, JSON.stringify(data), {headers: {'content-type': 'application/json'}})
     .then(res => { console.log(res.data); this.setState({ recommendations: res.data, loading: false }) })
     .catch(err => {
       console.error(err)
+      delete data.catalog
+      console.log(JSON.stringify(data))
       this.setState({ loading: false })
     })
+  }
+
+  fetchShipping () {
+    let cartItems = []
+    for (var i in this.props.cart) {
+      for (var j = 0; j < this.props.cart[i]; j++) {
+        cartItems.push(this.props.productsList[i])
+      }
+    }
+
+    let easyShipAPI = 'https://api.easyship.com/rate/v1/rates'
+    let token = 'sand_4vQPzMSaU5eHRHOy+5VHyafY15XOdp5esmYkX3c0i7k='
+    let headers = {
+      'headers': {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }
+    let data = {}
+    data.origin_country_alpha2 = this.state.originCountry
+    data.origin_postal_code = this.state.originPostalCode
+    data.destination_country_alpha2 = this.state.destinationCountry
+    data.destination_postal_code = this.state.destinationPostalCode
+    data.taxes_duties_paid_by = 'Sender'
+    data.is_insured = false
+    data.items = this.convertForAPI(cartItems, true)
+    axios.post(easyShipAPI, JSON.stringify(data), headers)
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+  }
+
+  selectAddress () {
+    this.setState({ addressSelected: true })
+    this.fetchRecommendations()
+    this.fetchShipping()
   }
 
   render () {
@@ -77,7 +113,7 @@ class Cart extends Component {
     return (
       <Container>
         <LeftContainer>
-          <Address />
+          <Address addressSelected={this.state.addressSelected} selectAddress={this.selectAddress} />
           <Recommendation productsList={productsList} cart={cart} handleUpdateCart={handleUpdateCart} loading={this.state.loading} recommendations={this.state.recommendations} />
         </LeftContainer>
 

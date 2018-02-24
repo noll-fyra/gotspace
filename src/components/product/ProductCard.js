@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import constants from '../../constants/constants'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import picture from '../../assets/default.jpg'
 import styled from 'styled-components'
 
@@ -48,7 +49,7 @@ class ProductCard extends Component {
   }
 
   render () {
-    let { product, count, smaller } = this.props
+    let { product, smaller } = this.props
     return (
       <ProductCardDiv>
         <ImgDiv smaller={smaller}>
@@ -61,7 +62,10 @@ class ProductCard extends Component {
             <Description>{this.shorten(product.description, 'description')}</Description>
           </div>
           <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'baseline'}}>
-            {count > 0
+            <ButtonLink to='/cart' onClick={this.handleAdd}>
+              <i className='fas fa-shopping-cart' />&nbsp;&nbsp;BUY
+        </ButtonLink>
+            {/* {count > 0
               ? <ButtonAdd>
                 <Inner onClick={this.handleSubtract}><i className='fas fa-minus' /></Inner>
                 <Inner>{count}</Inner>
@@ -70,7 +74,7 @@ class ProductCard extends Component {
               : <Button onClick={this.handleAdd}>
                 <i className='fas fa-shopping-cart' />&nbsp;&nbsp;Add to cart
           </Button>
-          }
+          } */}
           </div>
         </Info>
       </ProductCardDiv>
@@ -131,7 +135,45 @@ const Description = styled.div`
   margin-bottom: ${constants.size.margin.tiny};
 `
 
-const Button = styled.div`
+// const Button = styled.div`
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: ${constants.size.padding.small};
+//   cursor: pointer;
+//   border-radius: ${constants.size.borderRadius.small};
+//   background-color: ${constants.colors.brand};
+//   color: ${constants.colors.white};
+//   font-family: 'Muli';
+//   font-size: 0.9em;
+//   flex-wrap: wrap;
+//
+//   &: hover {
+//     background-color: ${constants.colors.omnivore}
+//   }
+// `
+
+// const ButtonAdd = Button.extend`
+//   justify-content: space-between;
+//   flex-flow: row;
+//   align-items: baseline;
+//
+//   &: hover {
+//     background-color: ${constants.colors.brand}
+//   }
+// `
+//
+// const Inner = styled.div`
+//   width: 33.333%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   color: ${constants.colors.white};
+//   font-size: 1.1em;
+// `
+
+const ButtonLink = styled(Link)`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -139,34 +181,16 @@ const Button = styled.div`
   padding: ${constants.size.padding.small};
   cursor: pointer;
   border-radius: ${constants.size.borderRadius.small};
-  background-color: ${constants.colors.brand};
+  background-color: ${constants.colors.action};
   color: ${constants.colors.white};
   font-family: 'Muli';
   font-size: 0.9em;
   flex-wrap: wrap;
+  text-decoration: none;
 
   &: hover {
-    background-color: ${constants.colors.omnivore}
+    background-color: ${constants.colors.omnivore};
   }
-`
-
-const ButtonAdd = Button.extend`
-  justify-content: space-between;
-  flex-flow: row;
-  align-items: baseline;
-
-  &: hover {
-    background-color: ${constants.colors.brand}
-  }
-`
-
-const Inner = styled.div`
-  width: 33.333%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${constants.colors.white};
-  font-size: 1.1em;
 `
 
 export default ProductCard

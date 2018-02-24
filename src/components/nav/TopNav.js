@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import CartIcon from './CartIcon'
+// import CartIcon from './CartIcon'
+import picture from '../../assets/default.jpg'
 import constants from '../../constants/constants'
 import styled from 'styled-components'
 
@@ -12,10 +13,11 @@ class TopNav extends Component {
         <Third style={{justifyContent: 'flex-start'}}>
           <Logo to='/'>Got Space?</Logo>
         </Third>
-        <Third />
+        <Third>Buy extra stuff for no added shipping fees</Third>
         <Third style={{justifyContent: 'flex-end'}}>
-          <CartIcon cart={this.props.cart} />
-          <User className='far fa-user-circle' />
+          {/* <CartIcon cart={this.props.cart} /> */}
+          {/* <User className='far fa-user-circle' /> */}
+          <Image src={picture} alt='user' />
         </Third>
       </Container>
     )
@@ -44,6 +46,7 @@ const Third = styled.div`
   justify-content: center;
   align-items: center;
   padding: 12px;
+  color: white;
 `
 
 const Logo = styled(Link)`
@@ -54,10 +57,19 @@ const Logo = styled(Link)`
   text-decoration: none;
 `
 
-const User = styled.span`
-  font-size: 32px;
+// const User = styled.span`
+//   font-size: 32px;
+//   margin-left: 12px;
+//   color: ${constants.colors.white};
+//   cursor: pointer;
+// `
+
+const Image = styled.img`
   margin-left: 12px;
-  color: ${constants.colors.white};
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
   cursor: pointer;
 `
 
